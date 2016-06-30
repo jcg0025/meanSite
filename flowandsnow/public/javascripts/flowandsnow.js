@@ -23,6 +23,7 @@ app.config(['$routeProvider', function($routeProvider){
         });
 }]);
 
+//HOMEPAGE
 app.controller('HomeCtrl', ['$scope', '$resource', '$http',
     function($scope, $resource, $http){
 
@@ -32,7 +33,7 @@ app.controller('HomeCtrl', ['$scope', '$resource', '$http',
             $scope.rivers = rivers;
         });
 
-        //usgs data collection 
+        //usgs alabama rivers 
         // $http({
         //     method: 'GET',
         //     url: 'http://waterdata.usgs.gov/al/nwis/current/?type=flow'
@@ -42,8 +43,9 @@ app.controller('HomeCtrl', ['$scope', '$resource', '$http',
         // }, function error (err){
         //     console.error(err);
         // });
-    }]);
-    
+}]);
+
+//ADD RIVER PAGE  
 app.controller('AddRiverCtrl', ['$scope', '$resource', '$location',
     function($scope, $resource, $location){
         $scope.title = 'Add a River';
@@ -53,26 +55,29 @@ app.controller('AddRiverCtrl', ['$scope', '$resource', '$location',
                 $location.path('/');
             });
         };
-    }]);
+}]);
 
+//ViEW RIVER PAGE
 app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routeParams', '$http',
     function($scope, $resource, $location, $routeParams, $http){
+        
+        $scope.title = $routeParams.name;       //river name as title
+
+        //initalize variables
         var River = $resource('/rivers/:id');
-        $scope.title = $routeParams.name;
         var d = document.getElementById('data');
         var nuggets = [];
         var graphs = [];
         var urls = [];
-        var gotCode = false;
 
+        //Get river code to access unigue data from usgs site
         River.get({ id: $routeParams.id }, function(river){
             $scope.riverCode = river.code;
-            
             getData();
         });
         
+        //Gather and refine HTML from live page
         function getData() {
-            console.log($scope.riverCode);
             $http({
                 method: 'GET',
                 url: 'http://waterdata.usgs.gov/al/nwis/uv/?site_no='+$scope.riverCode
@@ -80,102 +85,57 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
                 console.log(200);
                 var dataToFilter = response.data;
                 var filterStart = dataToFilter.search('<div class="stationContainer">');
-                var filterEnd = dataToFilter.search('/nwisweb/local/state/al/text/02377560web.jpg');
-                var filteredData = dataToFilter.slice(filterStart, filterEnd);
-                
-                d.innerHTML = filteredData;
-                freshData();
-
+                var filteredData = dataToFilter.slice(filterStart);
+                d.innerHTML = filteredData;     //Add filtered HTML to hidden DOM
+                freshData();                    //Begin data injection
             }, function error (err){
                 console.error(err);
             });
         }
             
         function freshData() {
-                var ready = false;
-                var graphs = d.getElementsByClassName('iv_graph_float1');
-                var headers = d.getElementsByClassName('stationContainer');
+                //initalize variables
+                var graphs = d.getElementsByClassName('iv_graph_float1');      //retrieves all graphs from hidden DOM
+                var headers = d.getElementsByClassName('stationContainer');    //retrieves all headers from hidden DOM
                 var graphSrc = undefined;
-                var graphNodes = [];
-                getGraphs();
+                $scope.graphNodes = [];
+
+                getGraphs();    //Must get graphs first or function will not finish in time
+
+                //refine header content and setData()
                 function getHeaders() {
-                      for (var i =1; i < headers.length; i++) {
+                    for (var i =1; i < headers.length; i++) {
                         var containers = headers[i].textContent;
                         var startSlice = containers.search('Most');
                         var endSlice = containers.search('CDT') + 3;
-                        var nugget = containers.slice(startSlice, endSlice);
+                        var nugget = containers.slice(startSlice, endSlice); //pretty data nugget
                         nuggets.push(nugget);
-                        console.log('first');
-                       }
-                       $scope.src1 = graphNodes[0].src;
-                       if (graphNodes.length > 1) {
-                            $scope.src2 = graphNodes[1].src;
-                       }
-                       console.log('last');
-                       setData();
+                    }
+                    setData();      
                 }
 
+                //acquire image nodes for url extraction and getHeaders();
                 function getGraphs() {
                     for (var i =0; i < graphs.length; i++) {
                         var graph = graphs[i].childNodes;
-                        console.log(graph);
-                        graphNodes.push(graph[1]);
-                        // console.log(graphSrc);
-                        // urls.push(graphSrc);
+                        $scope.graphNodes.push(graph[1]);
                     }                    
-                    console.log(graphNodes);
                     getHeaders();
                 }
+
         }
 
-            //     function getGraphs() {
-            //         for (var i =0; i < graphs.length; i++) {
-            //             var graph = graphs[i].childNodes;
-            //             var graphSrc = graph[1].currentSrc;
-            //             console.log(graphSrc);
-            //             urls.push(graphSrc);
-            //             if (i === graphs.length) {
-            //                 console.log(i);
-            //             }
-            //         }
-            //         // console.log(urls);
-                    // $scope.heightGraphSrc = urls[0];
-                    // $scope.cfsGraphSrc = urls[1];
-            //         // console.log('hi');
-
-            //     }
-            //     getGraphs();
-
-            // }
-
-            function setData(){
-                $scope.height = nuggets[0];
-                $scope.cfs = nuggets[1];
-
-             
-                // $scope.image1 = document.createElement('img');
-                // $scope.image2 = document.createElement('img');
-                
-                // console.log($scope.heightGraphSrc);
-                
-                // $scope.image1.src = $scope.src1;
-                
-                // $scope.image2.setAttribute('src', $scope.src2); 
-
-                // addImages();
-                
+        //After freshData() is collected setData()
+        function setData(){
+            $scope.src1 = $scope.graphNodes[0].src;
+            if ($scope.graphNodes.length > 1) {         //Some pages only have one graph
+                $scope.src2 = $scope.graphNodes[1].src;
             }
-
-            function addImages() {
-                var graph1Span = document.getElementById('graph1');
-                var graph2Span = document.getElementById('graph2');
-                graph1Span.appendChild($scope.image1);
-                graph2Span.appendChild($scope.image2);
-                console.log('boo');
-            }
+            $scope.height = nuggets[0];
+            $scope.cfs = nuggets[1];
         }
 
-    ]);
+}]);
     
 // app.controller('EditRiverCtrl', ['$scope', '$resource', '$location', '$routeParams',
 //     function($scope, $resource, $location, $routeParams){
@@ -194,7 +154,9 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
 //             });
 //         }
 //     }]);
-    
+
+
+//DELETE RIVER PAGE    
 app.controller('RemoveRiverCtrl', ['$scope', '$resource', '$location', '$routeParams',
     function($scope, $resource, $location, $routeParams){
         var Rivers = $resource('/rivers/:id');
@@ -204,5 +166,5 @@ app.controller('RemoveRiverCtrl', ['$scope', '$resource', '$location', '$routePa
                $location.path('/'); 
             });
         }
-    }]);
+}]);
     
