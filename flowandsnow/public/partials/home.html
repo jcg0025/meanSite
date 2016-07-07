@@ -1,10 +1,7 @@
-<p>
-    <a href="/#/add-river">Add a River</a>
-</p>
-<h1>Rivers</h1>
+<h1>Find a River</h1>
 
-<div ng-repeat='river in rivers'>
-    <a href="/#/river/{{river.name}}/{{river._id}}">{{river.name}}</a>
+<div ng-repeat='state in states'>
+    <a href="/#/{{state.state}}/{{state._id}}">{{state.state}}</a>
     &nbsp
     <a href="/#/remove-river/{{river.name}}/{{river._id}}"><span class='glyphicon glyphicon-remove'></span></a>
 </div>

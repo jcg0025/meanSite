@@ -22,20 +22,23 @@ document.addEventListener('DOMContentLoaded', function(){
         var row = cells[i];
 
         var td = row.getElementsByTagName('td');
-
+        console.log(td);
         //Anchor containing the river number
-        var aTag = td[0].getElementsByTagName('a');
-
+        if (td.length > 1) {
+            var aTag = td[0].getElementsByTagName('a');
+        
         //Check to see if anchor exists
         if (aTag.length > 0) { 
 
             //Trim the fat
-            if (i <= 209) {
+            // if (i <= 209) {
                 riverCodes.push(aTag[0].innerHTML);
+                console.log('code '+aTag[0].innerHTML);
                 var riverName = td[1].innerHTML;
                 rawNames.push(riverName);
-            }
-        }   
+            // }
+        }  
+        } 
     }
     var riverNames = [];
     for (var i = 0; i < rawNames.length; i++) {
@@ -59,11 +62,18 @@ document.addEventListener('DOMContentLoaded', function(){
     console.log(list);
     for (var i = 0; i < objectArray.length; i++) {
         var node = document.createElement("LI");                 // Create a <li> node
-        var textnode = document.createTextNode(objectArray[i]);         // Create a text node
+        var textnode = document.createTextNode(objectArray[i]+",");         // Create a text node
         node.appendChild(textnode);                              // Append the text to <li>
         document.getElementById("list").appendChild(node);
         
     }
-
+    console.log('check: '+riverNames.length);
 
 });
+
+//HTML TO APPEND TO<div id="data">
+// <div>
+//     <ul style='list-style: none; display: inline-block' id='list'>
+        
+//     </ul>
+// </div>

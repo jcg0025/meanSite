@@ -10,13 +10,17 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'partials/addRiver.html',
             controller: 'AddRiverCtrl'
         })
-        .when('/river/:name/:id', {
+        .when('/:state/:name/:code/test', {
             templateUrl: 'partials/viewRiver.html',
             controller: 'ViewRiverCtrl'
         })
         .when('/remove-river/:name/:id', {
             templateUrl: 'partials/deleteRiver.html',
             controller: 'RemoveRiverCtrl'
+        })
+        .when('/:state/:id', {
+            templateUrl: 'partials/states.html',
+            controller: 'statesCtrl'
         })
         .otherwise({
             redirectTo: '/'
@@ -30,13 +34,15 @@ app.controller('HomeCtrl', ['$scope', '$resource', '$http',
         //Get Rivers from local storage
         var Rivers = $resource('/rivers');
         Rivers.query(function(rivers) {
-            $scope.rivers = rivers;
+            // $scope.rivers = rivers[0].rivers;
+            $scope.states = rivers;
+            console.log(rivers);
         });
 
-        //usgs alabama rivers 
+        // usgs alabama rivers 
         // $http({
         //     method: 'GET',
-        //     url: 'http://waterdata.usgs.gov/al/nwis/current/?type=flow'
+        //     url: 'http://waterdata.usgs.gov/ga/nwis/current/?type=flow'
         // }).then(function success(response){
         //     console.log(200);
         //     console.log(response.data);
@@ -62,37 +68,46 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
     function($scope, $resource, $location, $routeParams, $http){
         
         $scope.title = $routeParams.name;       //river name as title
-
+        $scope.riverCode = $routeParams.code;
         //initalize variables
-        var River = $resource('/rivers/:id');
+        var River = $resource('/rivers');
+        River.query(function(res){
+            console.log(res);
+        });
+
+        var riverArray = $resource('/rivers/:id');
+        riverArray.get({id: $routeParams.id},function(res){
+            console.log(res);
+        });
         var d = document.getElementById('data');
         var nuggets = [];
         var graphs = [];
-        var urls = [];
 
         //Get river code to access unigue data from usgs site
-        River.get({ id: $routeParams.id }, function(river){
-            $scope.riverCode = river.code;
-            getData();
-        });
+        // River.get({ id: $routeParams.id }, function(river){
+        //     $scope.riverCode = river.code;
+        //     getData();
+        // });
         
         //Gather and refine HTML from live page
         function getData() {
             $http({
                 method: 'GET',
-                url: 'http://waterdata.usgs.gov/al/nwis/uv/?site_no='+$scope.riverCode
+                url: 'http://waterdata.usgs.gov/'+$routeParams.state+'/nwis/uv/?site_no='+$scope.riverCode
             }).then(function success(response){
                 console.log(200);
                 var dataToFilter = response.data;
                 var filterStart = dataToFilter.search('<div class="stationContainer">');
                 var filteredData = dataToFilter.slice(filterStart);
                 d.innerHTML = filteredData;     //Add filtered HTML to hidden DOM
-                freshData();                    //Begin data injection
+                freshData();                    //Begin data extraction
             }, function error (err){
                 console.error(err);
             });
         }
-            
+
+
+        //Data extaction    
         function freshData() {
                 //initalize variables
                 var graphs = d.getElementsByClassName('iv_graph_float1');      //retrieves all graphs from hidden DOM
@@ -105,13 +120,19 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
                 //refine header content and setData()
                 function getHeaders() {
                     for (var i =1; i < headers.length; i++) {
+                        
                         var containers = headers[i].textContent;
                         var startSlice = containers.search('Most');
-                        var endSlice = containers.search('CDT') + 3;
+                        if ($routeParams.state == 'al') {
+                            var endSlice = containers.search('CDT') + 3;
+                        } else {
+                            var endSlice = containers.search('EDT') + 3;
+                        }
                         var nugget = containers.slice(startSlice, endSlice); //pretty data nugget
                         nuggets.push(nugget);
                     }
-                    setData();      
+                    setData();   
+                    console.log(nuggets);   
                 }
 
                 //acquire image nodes for url extraction and getHeaders();
@@ -133,7 +154,10 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
             }
             $scope.height = nuggets[0];
             $scope.cfs = nuggets[1];
+
         }
+
+        getData();
 
 }]);
     
@@ -167,4 +191,25 @@ app.controller('RemoveRiverCtrl', ['$scope', '$resource', '$location', '$routePa
             });
         }
 }]);
+
+//STATES PAGE
+app.controller('statesCtrl', ['$scope', '$resource', '$routeParams', '$http', function($scope, $resource, $routeParams, $http) {
+  $scope.state = $routeParams.state;
+  $scope.id = $routeParams.id;
+  var stateRivers = $resource('rivers/:id');
+  stateRivers.get({id: $routeParams.id}, function(res) {
+      $scope.rivers = res.rivers;
+      console.log('yo:'+res);
+  });
+//   $http({
+//       method: 'GET',
+//       url: '/rivers/'+$routeParams.id
+//   }).then(function success(res){
+//       console.log(res);
+//   }, function error(err) {
+//       console.log(err);
+//   })
+}]);
+
+
     

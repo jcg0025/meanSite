@@ -23,14 +23,25 @@ router.post('/', function(req, res){
     });
 });
 
+router.get('/test', function(){
+    var collection = db.get('rivers');
+    collection.find({}, function(err, river){
+        if (err) throw err;
+        console.log('hello');
+      	res.json(river);
+    });
+});
+
 router.get('/:id', function(req, res) {
     var collection = db.get('rivers');
     collection.findOne({ _id: req.params.id }, function(err, river){
         if (err) throw err;
-
+        console.log('hi');
       	res.json(river);
     });
+    
 });
+
 
 router.put('/:id', function(req, res){
     var collection = db.get('rivers');

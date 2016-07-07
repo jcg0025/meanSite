@@ -1,0 +1,2523 @@
+flowandsnow.js:41 200
+flowandsnow.js:42 <!DOCTYPE html>
+
+<head>
+<title>USGS Current Conditions for Georgia_ Streamflow</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge'><![endif]-->
+<!--<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta http-equiv="P3P" content='policyref="http://waterdata.usgs.gov/w3c/p3p.xml"'>
+<link rel="P3Pv1" href="http://waterdata.usgs.gov/w3c/p3p.xml" type="text/xml" />
+<link rel="alternate" type="application/rss+xml" title="USGS Water Data for the Nation and USGS Water Services News" href="http://help.waterdata.usgs.gov/news/rss/" />
+<link rel="stylesheet" type="text/css" href="/nwisweb/stylesheets/USGS_common.css" />
+<link rel="stylesheet" type="text/css" href="/nwisweb/stylesheets/USGS_custom.css" />-->
+<!--<link rel="stylesheet" type="text/css" href="/nwisweb/stylesheets/nwisweb.css" />-->
+
+<!-- JF - media queries - responsive design - different device widths  -->
+<!--<link rel="stylesheet" media="screen and (min-width: 180px) and (max-width: 450px)" href="/nwisweb/stylesheets/nwiswebfluidsmallest.css" />
+<link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 900px)" href="/nwisweb/stylesheets/nwiswebfluid.css" />
+<link rel="stylesheet" media="screen and (min-width: 900px)" href="/nwisweb/stylesheets/nwisweb.css" />-->
+
+<!--
+<link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 770px)" href="/nwisweb/stylesheets/nwiswebfluid.css" />
+<link rel="stylesheet" media="screen and (min-width: 770px)" href="/nwisweb/stylesheets/nwisweb.css" />
+-->
+<!--<script type="text/javascript" src="/nwisweb/javascripts/respond.min.js"></script>-->
+
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" media="all" href="/nwisweb/stylesheets/nwisweb.css"/>
+<![endif]-->
+
+
+<!--<script type="text/javascript">-->
+    <!--//<![CDATA[-->
+    <!--
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25350863-1']);
+      _gaq.push(['_gat._anonymizeIp']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    // -->
+    <!--//]]>-->
+<!--</script>-->
+ 
+<!--<noscript>Warning: Javascript must be enabled to use all the features on this page!</noscript>-->
+
+<!--<script type="application/javascript" src="https://www2.usgs.gov/scripts/analytics/usgs-analytics.js"></script>
+
+
+
+<script type="text/javascript" src="/nwisweb/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/nwisweb/javascripts/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/nwisweb/stylesheets/jquery-ui-1.8.custom.css" media="screen">
+
+<script type="text/javascript" src="/nwisweb/javascripts/jquery.qtip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/nwisweb/stylesheets/jquery.qtip.css">
+
+<script type="text/javascript" src="/nwisweb/javascripts/modernizr.min.js"></script>
+
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/cupertino/jquery-ui.css">
+<link rel="stylesheet" href="/nwisweb/stylesheets/theme.jui.css">
+<script type="text/javascript" src="/nwisweb/javascripts/jquery.tablesorter.min.js"></script>-->
+<!--<script type="text/javascript" src="/nwisweb/javascripts/jquery.tablesorter.js"></script>-->
+<!--<script type="text/javascript" src="/nwisweb/javascripts/jquery.tablesorter.widgets.min.js"></script>
+
+<script type="text/javascript" src="/nwisweb/javascripts/jquery.nwisweb.min.js"></script>
+
+
+
+<script type="text/javascript" src="/nwisweb/javascripts/xp_progress.js"></script>
+
+
+<script type="text/javascript">-->
+    <!--//<![CDATA[-->
+    <!--
+
+    //jQuery(document).ready(function() {
+    jQuery(function() {
+
+      // State Specific Text
+      //-------------------------------------------------
+      //jQuery("#statewide_tx").hide();
+
+      // Toggle the statewide text with class
+      jQuery(".statewide_tx_header_div").click(function() {
+             jQuery(this).next("#statewide_tx").slideToggle(500);
+
+             var divText = jQuery(".statewide_tx_header_div").html();
+
+             if (divText.indexOf('Click for') != -1) {
+               //jQuery(".statewide_tx_header_div span").replaceWith( "<span id='statewide_header_tx'>Click to hide state-specific text</span>" );
+
+               jQuery("#statewide_header_tx").replaceWith( "<span id='statewide_header_tx'>Click to hide state-specific text</span>" );
+
+               jQuery("#collapsingIcon").removeClass('ui-icon-circle-plus');
+               jQuery("#collapsingIcon").addClass('ui-icon-circle-minus');
+
+             } else {
+               //jQuery(".statewide_tx_header_div span").replaceWith( "<span id='statewide_header_tx'>Click for state-specific text</span>" );
+
+               jQuery("#statewide_header_tx").replaceWith( "<span id='statewide_header_tx'>Click for state-specific text</span>" );
+
+               jQuery("#collapsingIcon").removeClass('ui-icon-circle-minus');
+               jQuery("#collapsingIcon").addClass('ui-icon-circle-plus');
+             }
+
+      });
+
+      // News Text
+      //-------------------------------------------------
+      //jQuery("#news_tx").hide();
+
+      // Toggle the news text with class
+      jQuery("#news_header").click(function() {
+             jQuery(this).next("#news_tx").slideToggle(500);
+
+             var divText = jQuery("#news_header").html();
+
+             if (divText.indexOf('Click for') != -1) {
+
+               jQuery("#news_header_tx").replaceWith( "<span id='news_header_tx'>Click to hide</span>" );
+
+               jQuery("#collapsingNewsIcon").removeClass('ui-icon-circle-plus');
+               jQuery("#collapsingNewsIcon").addClass('ui-icon-circle-minus');
+
+               jQuery("#news_header").removeClass('news_tx_header_div');
+               jQuery("#news_header").addClass('news_tx_header_div_expanded');
+
+             } else {
+
+               jQuery("#news_header_tx").replaceWith( "<span id='news_header_tx'>Click for</span>" );
+
+               jQuery("#collapsingNewsIcon").removeClass('ui-icon-circle-minus');
+               jQuery("#collapsingNewsIcon").addClass('ui-icon-circle-plus');
+
+               jQuery("#news_header").removeClass('news_tx_header_div_expanded');
+               jQuery("#news_header").addClass('news_tx_header_div');
+             }
+
+      });
+
+      // Station Text
+      //-------------------------------------------------
+      //jQuery("#station_tx").hide();
+
+      // Toggle the station text with class
+      jQuery("#station_header").click(function() {
+             jQuery(this).next("#station_tx").slideToggle(500);
+
+             var divText = jQuery("#station_header").html();
+
+             if (divText.indexOf('Click for') != -1) {
+
+               jQuery("#station_header_tx").replaceWith( "<span id='station_header_tx'>Click to hide</span>" );
+
+               jQuery("#collapsingStationIcon").removeClass('ui-icon-circle-plus');
+               jQuery("#collapsingStationIcon").addClass('ui-icon-circle-minus');
+
+             } else {
+
+               jQuery("#station_header_tx").replaceWith( "<span id='station_header_tx'>Click for</span>" );
+
+               jQuery("#collapsingStationIcon").removeClass('ui-icon-circle-minus');
+               jQuery("#collapsingStationIcon").addClass('ui-icon-circle-plus');
+
+             }
+
+      });  
+      
+      // Round corners on html5 button using only css (IE version 8 and lower need extra help)
+      //-------------------------------------------------
+      if (!Modernizr.borderradius) {
+            jQuery.getScript("/nwisweb/javascripts/jquery.corner.js", function() {
+              jQuery(".btn").corner();
+              jQuery(".mapperbtn").corner();
+            });
+      }
+
+      // If User selects the output sites to map option, force xml
+      //-------------------------------------------------
+      jQuery("input[type=radio][value=nwis_mapper]").change(function(){
+          //alert("Output sites on a map radio was selected");          
+          jQuery("#sitefile_output_format").val("xml");          
+      });      
+      
+      // If User selects a file as search criteria, disable the output sites to map option.
+      //-------------------------------------------------
+      if ( jQuery("#site_no_file_attachment").length || jQuery("#parameter_cd_file_attachment").length ) {
+         //jQuery("#nwis_mapper").attr('disabled', true);
+         jQuery("input[type=radio][value=nwis_mapper]").attr("disabled",true);
+
+         jQuery('#label_nwis_mapper').css({ opacity: 0.4 });
+         jQuery('div[id^="label_"]').css({ display: "inline" });
+
+         jQuery("#fileOfSitesMsg").append("* Selecting this search criteria disables the Show sites on a map option which is currently incompatible with file attachments.");
+         jQuery("#fileOfPmCodesMsg").append("* Selecting this search criteria disables the Show sites on a map option which is currently incompatible with file attachments.");
+      } else {
+         //jQuery("#nwis_mapper").attr('disabled', false);
+         jQuery("input[type=radio][value=nwis_mapper]").attr("disabled",false);
+         jQuery('div[id^="label_"]').css({ display: "inline" });
+      }
+
+      // Plone Help
+      //-------------------------------------------------
+            
+      var ploneHelpURL = "http://help.waterdata.usgs.gov";
+      //alert("ploneHelp from conf:" + ploneHelpURL);
+
+      // Testing qTip, a jQuery plug-in for ToolTips
+      // Match all <A/> links with a title tag and use it as the rollover content (default).
+      // -------------------------------------------------
+      jQuery('a[title]').qtip();
+                             
+      // Finds all <a href's with ids. If an id exists,
+      // run a get request into Plone, find the div with the same id,
+      // and update the title attribute so hover will populate with Plone info
+      // -------------------------------------------------
+
+      jQuery('a').each(function(){
+           var thisID       = jQuery(this).attr('id');
+           var thisHREF     = jQuery(this).attr('href');
+
+           var getTextFromPlone;
+           var partialPloneURL;
+           var pageInPloneUsingProxy;
+
+           // Search href so help data is retrieved from appropriate plone page
+           if (thisHREF && thisID) {
+               //alert("thisID:" + thisID + " thisHREF:" + thisHREF);
+
+               // Looking for Plone or help.waterdata.usgs.gov in URL - basically only help links
+               getTextFromPlone = thisHREF.indexOf("/Plone/");
+               if (getTextFromPlone > -1) {
+                  // Get URL string after /Plone/
+                  partialPloneURL = thisHREF.split('/Plone/')[1];
+                  pageInPloneUsingProxy = 'http://waterdata.usgs.gov/exthelp/' + partialPloneURL;
+               }
+
+               //getTextFromPlone = thisHREF.indexOf("/help.waterdata.usgs.gov/");
+               //if (getTextFromPlone > -1) {
+                   // Get URL string after /help.waterdata.usgs.gov/
+               //    partialPloneURL = thisHREF.split('/help.waterdata.usgs.gov/')[1];
+               //    pageInPloneUsingProxy = 'http://waterdata.usgs.gov/exthelp/' + partialPloneURL;
+               //}
+
+               // Pull Plone URL from Conf file
+               // ---------------------------------------------
+               getTextFromPlone = thisHREF.indexOf(ploneHelpURL);
+               if (getTextFromPlone > -1) {
+                   // Get URL string after /help.waterdata.usgs.gov/
+                   partialPloneURL = thisHREF.split(ploneHelpURL)[1];
+                   pageInPloneUsingProxy = 'http://waterdata.usgs.gov/exthelp/' + partialPloneURL;
+               }
+               
+           }
+
+           if (thisID) {
+               //alert("Testing finding <a href's with IDs = " + thisID + " URL = " + thisHREF + " pageInPloneUsingProxy = " + pageInPloneUsingProxy);
+
+              var origTitle = jQuery('#'+thisID).attr("title");
+
+              jQuery('#'+thisID).mouseover(function (e) {
+              
+                 //var getURL = "http://webvadevvs03.er.usgs.gov/exthelp/codes-and-parameters/codes";
+                 var getURL = pageInPloneUsingProxy;
+
+                 var origTitlePlusData = '';
+                 var hrefValuesList = [];
+                 var host = 'http://waterdata.usgs.gov';
+
+                 jQuery.ajax({
+
+                   url: getURL,
+                   dataType: "html",
+                   success: function (data) {
+                      var data          = jQuery(data).find('.'+thisID);
+                      var ref, ref_mod, internalRef, anchors, i, end, data_new;
+                      
+                      // Search text returned from Plone for hrefs
+                      anchors = data.find('a');
+   
+                      // Loop through all href values from each anchor element
+                      // Use this to search and replace text returned from Plone to replace internal links with ploneHelpURL
+                      end      = anchors.length;
+                      data_new = data.html();
+                      var seen = {};
+                      for (i = 0; i < end; i++) { 
+                         ref         = anchors[ i ].href ;
+                         ref_mod     = ref.replace('http://waterdata.usgs.gov',ploneHelpURL);                                                 			 
+                         internalRef = ref.replace('http://waterdata.usgs.gov', '');
+                         internalRef = internalRef.replace('&', '&amp;');
+			 
+                         var txt = internalRef;
+                         if (seen[txt]) {
+                            // Do not replace same internal link twice
+                         } else {
+                            seen[txt] = true;
+	                                         
+                            //var regex = new RegExp('{'+internalRef+'}', "ig");      // Global replace efforts not working
+                            //var regex = new RegExp(internalRef, "g");                                           
+                            //data_new = data_new.replace(regex,ref_mod);
+			    
+                            data_new = data_new.replace(internalRef,ref_mod);        // This works, but does not do global replace
+                                                                                     // This solution cannot have duplicate internal links per hover in Plone
+			    
+                            //data_new = data_new.split(internalRef).join(ref_mod);  // This works global, but doubles up
+			    			    			    
+                            //alert(" Changed: " + internalRef + " to " + ref_mod + " ---->  data_new: " + data_new );			                                
+                            <!--hrefValuesList.push( ref );
+                         }
+                      }
+                                                                 
+                      //alert("data: " + data_new );
+                                                   
+                      // Combine text from Plone to original title
+                      //origTitlePlusData = origTitle + ' <BR><BR> ' + data.html();                      
+                      origTitlePlusData = origTitle + ' <BR><BR> ' + data_new;
+
+                      if (data.html() != null) {
+                         jQuery('#'+thisID).attr('title', origTitlePlusData);
+                      }
+                   }
+                 });
+              });
+
+ 	      // Makes the ToolTip delay so that you can click on a URL in the help text
+ 	      jQuery(this).qtip({
+ 		 hide: {
+ 		    delay:500, // Give a small delay to allow the user to mouse over it
+ 		    fixed:true
+ 		 },
+ 		 style: {
+ 		    name: 'dark',
+ 		    style: {
+ 		       border: 1,
+ 		       cursor: 'pointer',
+ 		       padding: '5px 8px',
+ 		       name: 'blue'
+ 		    },
+ 		 border: {},
+ 		 tip: true     // Apply a tip at the default tooltip corner
+ 		 }
+ 	      });
+
+
+           } // End of -> if(thisID)
+      });   // End of -> each function
+
+
+
+
+      // Processing Bar
+      //-------------------------------------------------
+      // If the loading bar exists, remove it
+
+      var barChk = jQuery(".loading").text();
+      //alert('loading=' + barChk);
+
+      if (barChk) {
+         jQuery(window).load(function() {
+             processingBar.hideBar();
+             jQuery("#loading").fadeOut("slow",function() { jQuery("#loading").remove(); });
+         });
+      }
+
+
+      // DatePicker
+      //-------------------------------------------------
+      
+      // Calendar Date Picker
+      //-------------------------------------------------
+      var http_text  = window.location.href.substring(0,location.href.indexOf("?") + 1);
+      //alert(http_text);
+      var uv_search  = http_text.search(/uv/i);
+      var dv_search  = http_text.search(/dv/i);
+
+      //alert("Only executing datepicker jquery code where necessary...");
+      //alert("uv_search " + uv_search);
+      //alert("dv_search " + dv_search);
+      
+      // Pull earliest uv/dv and qw por earliest dates from system conf for datepicker
+      //
+      var earliest_uv_date     = "2007-10-01";
+      var earliest_dv_date     = "1838-01-01";
+      var earliest_qw_por_date = "1860-01-01";      
+      //alert("earliest_uv_date=" + earliest_uv_date + " earliest_dv_date=" + earliest_dv_date + " earliest_qw_por_date=" + earliest_qw_por_date);
+      
+      // Prep earliest year ranges for datepicker
+      //
+      var earliest_uv_yr          = earliest_uv_date.substring(0, 4);
+      var earliest_dv_yr          = earliest_dv_date.substring(0, 4);
+      var earliest_qw_por_yr      = earliest_qw_por_date.substring(0, 4);
+      var earliest_uv_yrRange     = earliest_uv_yr + ":+0";
+      var earliest_dv_yrRange     = earliest_dv_yr + ":+0";
+      var earliest_qw_por_yrRange = earliest_qw_por_yr + ":+0";
+
+      // Div ID begin_date is present
+      //
+      //if(jQuery( "#begin_date" ).length > 0) {
+
+         if(uv_search > -1)
+           {
+            jQuery( "#begin_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_uv_date), maxDate: '+1d', yearRange: earliest_uv_yrRange });
+            jQuery( "#end_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_uv_date), maxDate: '+1d', yearRange: earliest_dv_yrRange });
+
+            jQuery( "#rt_begin_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_uv_date), maxDate: '+1d', yearRange: earliest_uv_yrRange });
+            jQuery( "#rt_end_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_uv_date), maxDate: '+1d', yearRange: earliest_uv_yrRange });
+   
+           }
+         else if(dv_search > -1)
+           {
+            jQuery( "#begin_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_dv_date), maxDate: '+1d', yearRange: earliest_dv_yrRange });
+            jQuery( "#end_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_dv_date), maxDate: '+1d', yearRange: earliest_dv_yrRange });
+
+            jQuery( "#rt_begin_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_dv_date), maxDate: '+1d', yearRange: earliest_dv_yrRange });
+            jQuery( "#rt_end_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_dv_date), maxDate: '+1d', yearRange: earliest_dv_yrRange });
+           }
+         else
+           {
+            jQuery( "#begin_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(1800,1-1,01), maxDate: '+1d', yearRange: "1800:+0" });
+            jQuery( "#end_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(1800,1-1,01), maxDate: '+1d', yearRange: "1800:+0" });
+
+            jQuery( "#rt_begin_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(1800,1-1,01), maxDate: '+1d', yearRange: "1800:+0" });
+            jQuery( "#rt_end_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(1800,1-1,01), maxDate: '+1d', yearRange: "1800:+0" });
+           }
+
+         if(jQuery( "#por_begin_date" ).length > 0)
+           {
+            jQuery( "#por_begin_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_qw_por_date), maxDate: '+1d', yearRange: earliest_qw_por_yrRange });
+            jQuery( "#por_end_date" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(earliest_qw_por_date), maxDate: '+1d', yearRange: earliest_qw_por_yrRange });
+
+           }
+        //}
+
+      //jQuery( "#start_dt_id" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(1800,1-1,01), maxDate: '+1d', yearRange: "1800:+0" });
+      //jQuery( "#end_dt_id" ).datepicker({ dateFormat: jQuery.datepicker.W3C, changeMonth: true, changeYear: true, minDate: new Date(1800,1-1,01), maxDate: '+1d', yearRange: "1800:+0" });
+
+
+
+
+     // TableSorter - New Version with Fixed Headers
+     //-------------------------------------------------
+          //jQuery("table").tablesorter({
+     jQuery(".dataList").tablesorter({
+            //selectorHeaders: '> thead th, > thead td',
+            //widthFixed : true,
+	    headerTemplate : '{content} {icon}', // Add icon for jui theme; new in v2.7!
+	    widgets: ["columns", "filter", "stickyHeaders", "uitheme", "zebra"] ,
+	    //sortList: [ [0,0], [1,0], [2,0] ],   // Sorts on first 3 cols
+	    widgetOptions: {
+	      // css class name applied to the sticky header row (tr)
+	      stickyHeaders : 'tablesorter-stickyHeader',
+	      zebra   : ["ui-widget-content even", "ui-state-default odd"],
+	      uitheme : 'jui'
+	    }
+     });
+
+     // Exception for Peak data table with superscripts
+     //-------------------------------------------------
+     jQuery(".dataListWithSuperscript").tablesorter({
+            //selectorHeaders: '> thead th, > thead td',
+            //widthFixed : true,
+	    headerTemplate : '{content} {icon}', // Add icon for jui theme; new in v2.7!
+	    widgets: ["columns", "filter", "stickyHeaders", "uitheme", "zebra"] ,
+	    //sortList: [ [0,0], [1,0], [2,0] ],   // Sorts on first 3 cols
+	    widgetOptions: {
+	      // css class name applied to the sticky header row (tr)
+	      stickyHeaders : 'tablesorter-stickyHeader',
+	      zebra   : ["ui-widget-content even", "ui-state-default odd"],
+	      uitheme : 'jui'
+	    },
+            textExtraction: {
+              // 3rd and 4th colunms for Peak table sorting only on span tag, ignoring sup (superscript) tag
+              2: function(node, dataList, cellIndex){ return jQuery(node).find("span").text(); },
+              3: function(node, dataList, cellIndex){ return jQuery(node).find("span").text(); }
+            }
+
+     });
+
+     // Click a row and it will highlight for greater visibility
+     //-------------------------------------------------
+     jQuery('.dataList td').click(
+           	function (event) { jQuery(this).parent('tr').toggleClass('rowclick');
+     });
+
+     // Click a row and it will highlight for greater visibility
+     //-------------------------------------------------
+     jQuery('.dataListWithSuperscript td').click(
+           	function (event) { jQuery(this).parent('tr').toggleClass('rowclick');
+     });
+
+
+     // Water-Use
+     //-------------------------------------------------
+     // Not needed
+
+
+   });  //end of document.ready
+
+   // -->
+   
+<!--</script>-->
+ 
+<!--<noscript>Warning: Javascript must be enabled to use all the features on this page!</noscript>-->
+
+<script src='script.js'></script>
+
+</head>
+
+<body>
+
+<div id="nwisweb_header">
+
+<!-- SERVER LEVEL BANNER -->
+
+<script type="text/javascript">
+//<![CDATA[
+<!--
+
+function server_level_navigation_manager()
+ {
+ var local_cgi_url_base = "/ga/nwis";
+ var national_host_url  = "";
+ var nwis_mapper_url    = "http://maps.waterdata.usgs.gov/";
+ //alert(national_host_url);
+ var office_index  = document.select_office.office.selectedIndex;
+ var office  = document.select_office.office.options[ office_index ].value;
+ var my_office = "ga";
+ if(office == my_office) {
+   var url = local_cgi_url_base + '/'; }
+ else {
+   var url = national_host_url + '/' + office + "/nwis/"; }
+ var program_index = document.select_office.program.selectedIndex;
+ var program = document.select_office.program.options[ program_index ].value;
+ if (program == 'mapper') {
+   if (office != 'usa') {
+     //var url = nwis_mapper_url + '?state=' + office ;
+     var url = nwis_mapper_url + 'mapper/index.html?state=' + office; }
+   else {
+     var url = nwis_mapper_url ; }
+     //window.open(url);
+     window.location = (url); }
+ else {
+   var url = url + program;
+   window.location = (url);}
+ return (false);
+ }
+//-->
+//]]>
+</script>
+ 
+<!--<noscript>Warning: Javascript must be enabled to use all the features on this page!</noscript>-->
+
+<form name="select_office" action="/ga/nwis" id="select_office">
+
+<!-- BEGIN USGS Header Template -->
+  <div id="usgscolorband">
+    <div id="usgsbanner">
+      <div id="usgsidentifier"><a href="http://www.usgs.gov/"><img src="/nwisweb/icons/USGS_header_graphic_usgsIdentifier_white.jpg"
+         alt="USGS - science for a changing world" title="U.S. Geological Survey Home Page" width="178" height="72" /></a>
+      </div>
+      <div id="usgsccsabox">
+        <div id="usgsccsa">
+          <br /><a href="http://www.usgs.gov/">USGS Home</a>
+          <br /><a href="http://www.usgs.gov/ask/">Contact USGS</a>
+          <br /><a href="http://www.usgs.gov/search/">Search USGS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="usgstitle">
+    <p><a href="/nwis">National Water Information System: Web Interface</a></p>
+  </div>
+<!-- END USGS Header Template -->
+
+<!-- BEGIN Nav Bar -->
+<div id="navbar">
+   <div id="subtitle">
+      <b><a href="http://water.usgs.gov"><u>USGS Water Resources</u></a></b>&nbsp; &nbsp; 
+      <!--<div><a href="#top_of_page"></a></div>-->
+   </div>
+   <div id="navdropdowns">
+      <span id="programlist">
+         <label accesskey="c" for="program"><strong>Data Category:</strong></label><br />
+<select name="program" id="program" tabindex="1">
+<option value="nwis">Home</option>
+<option value="rt" selected="selected">Current Conditions</option>
+<option value="si">Site Information</option>
+<option value="mapper">Mapper</option>
+<option value="sw">Surface Water</option>
+<option value="gw">Groundwater</option>
+<option value="qw">Water Quality</option>
+<option value="wu">Water Use</option>
+</select>
+      </span>
+      <span id="statelist">
+         <label accesskey="A" for="office"><strong>Geographic Area:</strong></label><br />
+<select onchange="return server_level_navigation_manager();" name='office' id="office" tabindex="1">
+ <option value="usa">United States
+</option><option value="al">Alabama</option>
+<option value="ak">Alaska</option>
+<option value="aq">American Samoa</option>
+<option value="az">Arizona</option>
+<option value="ar">Arkansas</option>
+<option value="ca">California</option>
+<option value="co">Colorado</option>
+<option value="ct">Connecticut</option>
+<option value="de">Delaware</option>
+<option value="dc">Dist. of Columbia</option>
+<option value="fl">Florida</option>
+<option value="ga"selected="selected">Georgia</option>
+<option value="gu">Guam</option>
+<option value="hi">Hawaii</option>
+<option value="id">Idaho</option>
+<option value="il">Illinois</option>
+<option value="in">Indiana</option>
+<option value="ia">Iowa</option>
+<option value="ks">Kansas</option>
+<option value="ky">Kentucky</option>
+<option value="la">Louisiana</option>
+<option value="me">Maine</option>
+<option value="md">Maryland</option>
+<option value="ma">Massachusetts</option>
+<option value="mi">Michigan</option>
+<option value="mn">Minnesota</option>
+<option value="ms">Mississippi</option>
+<option value="mo">Missouri</option>
+<option value="mt">Montana</option>
+<option value="ne">Nebraska</option>
+<option value="nv">Nevada</option>
+<option value="nh">New Hampshire</option>
+<option value="nj">New Jersey</option>
+<option value="nm">New Mexico</option>
+<option value="ny">New York</option>
+<option value="nc">North Carolina</option>
+<option value="nd">North Dakota</option>
+<option value="mp">Northern Mariana Islands</option>
+<option value="oh">Ohio</option>
+<option value="ok">Oklahoma</option>
+<option value="or">Oregon</option>
+<option value="pa">Pennsylvania</option>
+<option value="pr">Puerto Rico</option>
+<option value="ri">Rhode Island</option>
+<option value="sc">South Carolina</option>
+<option value="sd">South Dakota</option>
+<option value="tn">Tennessee</option>
+<option value="tx">Texas</option>
+<option value="ut">Utah</option>
+<option value="vt">Vermont</option>
+<option value="vi">Virgin Islands</option>
+<option value="va">Virginia</option>
+<option value="wa">Washington</option>
+<option value="wv">West Virginia</option>
+<option value="wi">Wisconsin</option>
+<option value="wy">Wyoming</option>
+</select>
+      </span>
+      <span id="maingobutton">
+         <input accesskey="g" type="submit" value="GO" onclick="return server_level_navigation_manager();">
+      </span>
+   </div>
+</div>
+<div class='clear'></div>
+<!-- END Nav Bar -->
+</form>
+<!--<a name="top_of_page"></a>-->
+
+
+<!-- noscript tag replacement-displays message if JavaScript is not enabled -->
+
+<div id="noScript">Warning: Javascript must be enabled to use all the features on this page!
+<script type="text/javascript">
+    //<![CDATA[
+    <!--
+document.getElementById('noScript').style.display = 'none';
+    // -->
+    //]]>
+</script>
+</div>
+
+
+
+<!-- NWISWeb Page Loading Script -->
+
+<p id="loading" class="loading"><br>Page Loading - Please Wait...
+<script type="text/javascript">
+    //<![CDATA[
+    <!--
+var processingBar = createBar (300,15,'white',1,'black','blue',85,7,10,"");
+    // -->
+    //]]>
+</script>
+</p>
+
+
+
+<!-- SYSTEM MESSAGE -->
+
+
+<!-- Mobile Detection -->
+
+
+<!-- NWISWeb System Message -->
+
+<div class="collapse_div">
+<div id="news_header" class="news_tx_header_div_expanded">
+  <span id="collapsingNewsIcon" class="ui-icon ui-icon-circle-minus"></span>
+  <span id="news_header_tx">Click to hide</span>News Bulletins
+</div>
+<div id="news_tx">
+<ul>
+    <li>
+       June 20, 2016 
+    </li>
+<li><b>Changes coming this summer</b> to some water-data formats on this website.  The changes are minor for most end users. <span style="text-decoration:underline;"><a href="http://help.waterdata.usgs.gov/news/061016">Learn More</a></span> </li>
+
+    <li>Use our <a href="http://m.waterdata.usgs.gov">Mobile-friendly water data site </a> from your
+mobile device! </li>
+    <li>
+       <span style="text-decoration:underline;"><a href="http://help.waterdata.usgs.gov/news">Full News</a></span> 
+       <a href="http://help.waterdata.usgs.gov/news/RSS/"><img src="/nwisweb/icons/rss_icon.gif" border="0" alt="RSS icon"/></a>
+    </li>    
+</ul>
+
+</div>
+</div>
+
+
+
+<div class='clear'></div>
+
+<!-- PAGE_TITLE -->
+
+
+<!-- STATEWIDE TEXT -->
+
+<div class="collapse_div">
+<div class="statewide_tx_header_div">
+  <span id="collapsingIcon" class="ui-icon ui-icon-circle-minus"></span>
+  <span id="statewide_header_tx">Click to hide state-specific text</span>
+</div>
+<div id="statewide_tx">
+<ul>
+  <li><font color="#000080"><a href="http://ga.water.usgs.gov/">USGS
+  Water Resources of Georgia</a>: the place to start for all USGS water
+  information in Georgia.</font></li>
+
+  <li><font color="#000080">Sign up for <a href=
+  "http://ga2.er.usgs.gov/gainformation/index.cfm">South Atlantic Water
+  Science Center - Georgia E-mail Notices</a>: publication releases,
+  gage shutdown notifications, and so forth</font></li>
+
+  <li><a href="http://ga.water.usgs.gov/precip/"><font color=
+  "#000080">NEW Statewide Rainfall Map</font></a></li>
+
+  <li><font color="#000080">Sign up for <a href=
+  "http://water.usgs.gov/wateralert">custom Water Alerts by text or
+  email</a></font></li>
+</ul>
+<br />
+</div>
+</div>
+
+
+
+</div> <!-- nwisweb_header -->
+
+
+<h2>Current Conditions for Georgia: Streamflow -- 355 site(s) found</h2>
+<table border="0">
+ <tr>
+  <td width="20"> </td>
+  <td>
+<span class="h3"><a href="/ga/nwis/?provisional" target="_top">
+PROVISIONAL DATA SUBJECT TO REVISION</a><br /></span>
+<!-- begin introduction text -->
+
+<!-- end introduction text   -->
+<!-- start of selection table -->
+<script type="text/javascript">
+//<![CDATA[
+
+function init () {
+   var selectValue = document.getElementById("SelectBoxDiv");
+   //alert('init() called. Checking if site number/station name select box needs to be created' + selectValue);
+	
+   if (!selectValue){	
+      var newSelectBoxDiv = jQuery(document.createElement('span')).attr("id", 'SelectBoxDiv');
+      newSelectBoxDiv.after('search_site_no_station_nm').html('&nbsp;<select name="site_no_name_select" id="site_no_name_select"><option value="siteno" selected>site number</option><option value="station_nm">station name</option></select>');
+      newSelectBoxDiv.insertAfter('#search_site_no_station_nm');				
+   }
+}
+
+function setHandlers(e) {
+
+   //alert('setHandlers() called. If the select box is changed, updateValue.');
+   jQuery('#site_no_name_select').change(updateValue);
+}
+
+function updateValue() {	
+
+   //alert('updateValue() called. Set input value to: ' + jQuery('#site_no_name_select').val() );
+   jQuery('input[site_no_name_select]').val(jQuery('#site_no_name_select').val());
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+jQuery(document).ready(function() {
+
+   // Hide/Show portions of the RTnavbar based on select
+   //------------------------------------------------------------  
+
+   var rtNavBarMainSelection = jQuery('#select_display').val();
+   if (rtNavBarMainSelection == 'intro') {
+      jQuery('#rtNavBarGroupBySection').hide();
+      jQuery('#rtNavBarSearchSection').hide();
+      jQuery('#rtNavBarMapSection').hide();  
+   } else if (rtNavBarMainSelection == 'custom') {
+      jQuery('#rtNavBarGroupBySection').hide();
+      jQuery('#rtNavBarSearchSection').hide();
+      jQuery('#rtNavBarMapSection').hide();     
+   } else if (rtNavBarMainSelection == 'dwc') {
+      jQuery('#rtNavBarGroupBySection').hide();
+      jQuery('#rtNavBarSearchSection').hide();
+      jQuery('#rtNavBarMapSection').hide();    
+   } else if (rtNavBarMainSelection == 'wqwatch') {
+      jQuery('#rtNavBarGroupBySection').hide();
+      jQuery('#rtNavBarSearchSection').hide();
+      jQuery('#rtNavBarMapSection').hide();   
+   } else if (rtNavBarMainSelection == 'gwwatch') {
+      jQuery('#rtNavBarGroupBySection').hide();
+      jQuery('#rtNavBarSearchSection').hide();
+      jQuery('#rtNavBarMapSection').hide();         
+   }   
+
+   jQuery('#select_display').change(function() {
+     var rtNavBarMainSelection = jQuery('#select_display').val(); 
+     //console.log("rtNavBarMainSelection: " + rtNavBarMainSelection);
+     
+     if (rtNavBarMainSelection == 'intro') {
+        jQuery('#rtNavBarGroupBySection').hide();
+        jQuery('#rtNavBarSearchSection').hide();
+        jQuery('#rtNavBarMapSection').hide();    
+     } else if (rtNavBarMainSelection == 'custom') {
+        jQuery('#rtNavBarGroupBySection').hide();
+        jQuery('#rtNavBarSearchSection').hide();
+        jQuery('#rtNavBarMapSection').hide();    
+     } else if (rtNavBarMainSelection == 'dwc') {
+        jQuery('#rtNavBarGroupBySection').hide();
+        jQuery('#rtNavBarSearchSection').hide();
+        jQuery('#rtNavBarMapSection').hide();    
+     } else if (rtNavBarMainSelection == 'wqwatch') {
+        jQuery('#rtNavBarGroupBySection').hide();
+        jQuery('#rtNavBarSearchSection').hide();
+        jQuery('#rtNavBarMapSection').hide();   
+     } else if (rtNavBarMainSelection == 'gwwatch') {
+        jQuery('#rtNavBarGroupBySection').hide();
+        jQuery('#rtNavBarSearchSection').hide();
+        jQuery('#rtNavBarMapSection').hide();          
+     } else {
+        jQuery('#rtNavBarGroupBySection').show();
+        jQuery('#rtNavBarSearchSection').show();
+        jQuery('#rtNavBarMapSection').show();
+     }
+     
+   });
+   
+   //alert('ready() called');
+   setHandlers();
+   updateValue();   
+   
+   // If text search has an initial value, keep siteno/stationnm select box alive
+   //------------------------------------------------------------
+   var val = jQuery('#search_site_no_station_nm').val(); 
+   if (val) {
+      var newSelectBoxDiv = jQuery(document.createElement('span')).attr("id", 'SelectBoxDiv');
+      newSelectBoxDiv.after('search_site_no_station_nm').html('&nbsp;<select name="site_no_name_select" id="site_no_name_select"><option value="siteno" selected>site number</option><option value="station_nm">station name</option></select>');
+      newSelectBoxDiv.insertAfter('#search_site_no_station_nm');
+      if(isNumeric(val)) { 
+        jQuery( "#site_no_name_select" ).val('siteno');
+      } else {     
+       jQuery( "#site_no_name_select" ).val('station_nm');
+      }             
+   }
+   
+   // Auto change siteno/stationnm select box based on text entry
+   //------------------------------------------------------------
+   jQuery('.trackChange').change(function() {
+     //alert('Text Handler for change() called.');
+     var val = jQuery('#search_site_no_station_nm').val(); 
+     if(isNumeric(val)) { 
+       jQuery( "#site_no_name_select" ).val('siteno');
+     } else {     
+       jQuery( "#site_no_name_select" ).val('station_nm');
+     }     
+   });
+   
+});
+
+//]]>
+</script>
+
+  
+<script type="text/javascript">
+//<![CDATA[
+<!--
+// This handles redirection of urls on javascript enabled browsers.
+// The user is sent directly to the national webserver if a new
+// display is selected, avoiding redirection via nwisweb software.
+// DOESNT WORK YET, JOE
+
+function rt_navigation_manager(format) {
+
+ //alert('rt_navigation_manager() called');
+
+ var local_cgi_url_base = "/ga/nwis";
+ var national_host_url  = "http://nwis.waterdata.usgs.gov";
+ var waterwatch_url     =  "http://waterwatch.usgs.gov";
+ var isNatWebRT         = "1";
+ var isNAD              = "0";
+ var program_index      = document.select_office.program.selectedIndex;
+ var program            = document.select_office.program.options[ program_index ].value;
+ var display_index      = document.select_rt_display.select_display.selectedIndex;
+ var display            = document.select_rt_display.select_display.options[ display_index ].value
+ var stay_local         = 1;
+ 
+ if(display.match(/^Daily/i) && (isNatWebRT == 0 && isNAD == 0)) {
+   stay_local = 0;
+ }
+ 
+ var office_index = document.select_office.office.selectedIndex;
+ var office       = document.select_office.office.options[ office_index ].value;
+ var my_office    = "ga";
+ var state_cd     = "13";
+ 
+ if(office == my_office) {
+    if(stay_local == 1) {
+       var url = local_cgi_url_base + '/';
+    } else {
+       var url = national_host_url + '/' + office + "/nwis/";
+    }
+ } else {
+    var url = national_host_url + '/' + office + "/nwis/";
+ }
+ 
+ //var gurl = url + program
+ //var gurl = url + 'current'
+ var group_by_index            = document.select_rt_display.group_table_by.selectedIndex;
+ var group_by                  = document.select_rt_display.group_table_by.options [ group_by_index ].value;
+ var search_site_no_station_nm = document.select_rt_display.search_site_no_station_nm.value;
+ 
+ var search_site_no_name_select= jQuery('#site_no_name_select').val(); 
+ //alert('search_site_no_name_select: ' + search_site_no_name_select);   
+    
+ if (display == 'dwc') { 
+    if (office != 'usa') {
+       var url = waterwatch_url + '/?m=real&r=' + office + '&w=real,map';
+    } else {
+       var url = waterwatch_url
+    }
+    
+ } else if (display == 'wqwatch') { 
+    var url = "http://water.usgs.gov/waterwatch/wqwatch";
+    
+ } else if (display == 'gwwatch') { 
+    if (office == 'usa') {
+       var url = "http://groundwaterwatch.usgs.gov/Net/OGWNetwork.asp?ncd=rtn";    
+       
+    } else if (state_cd == '66' || state_cd == '69' || state_cd == '78' || state_cd == '60') {
+       // If the state_cd is Guam(66), Northern Mariana Islands(69), Virgin Islands(78), or American Somoa(60)
+       // redirect to usa version    
+       var url = "http://groundwaterwatch.usgs.gov/Net/OGWNetwork.asp?ncd=rtn";  
+       
+    } else {
+       var url = "http://groundwaterwatch.usgs.gov/StateMapsNet.asp?ncd=rtn" + "&sc=" + state_cd;   
+    }
+    
+ } else { 
+    var url = url + 'current/?type=' + display;
+    if (group_by) {
+       var url = url + '&group_key=' + group_by
+    }
+    if (search_site_no_station_nm) {
+       var url = url + '&search_site_no_station_nm=' + search_site_no_station_nm
+    }
+    if (search_site_no_name_select) {
+       var url = url + '&site_no_name_select=' + search_site_no_name_select
+    }     
+    
+ }
+ 
+ //alert('format=' + format);
+ if(format =='nwis_mapper') {
+    //alert('Show sites on a map clicked from Predefined display bar');
+    url = url + '&format=nwis_mapper&sitefile_output_format=xml&column_name=agency_cd&column_name=site_no&column_name=station_nm';
+ }
+  
+ window.location = (url);
+ return (false);
+ }
+// -->
+//]]>
+</script>
+
+<form method="get" action="" name="select_rt_display">
+
+<div id="rtnavbar">
+
+  <span class="rtnavbarcol">
+  <strong><label for="select_display"> --- Predefined displays --- </label></strong><br />
+  <select name="type" id="select_display" tabindex="1">
+<option  value="intro">Introduction</option>
+<option  value="custom">Build Custom Table</option>
+<option  value="dwc">WaterWatch (offsite)</option>
+<option  value="wqwatch">WaterQualityWatch (offsite)</option>
+<option  value="gwwatch">GroundwaterWatch (offsite)</option>
+<option selected="selected" value="flow">Georgia Streamflow Table</option>
+<option  value="precip">Georgia Precipitation Table</option>
+<option  value="gw">Georgia Groundwater Table</option>
+<option  value="quality">Georgia Water-Quality Table</option>
+<option  value="res">Lake and Reservoir Table</option>
+<option  value="dailystage">Daily stage</option>
+<option  value="dailydischarge">Daily streamflow</option>
+<option  value="dailystagedischarge">Daily Stage and Streamflow</option>
+
+  </select>
+  </span>
+
+  <span class="rtnavbarcol" id="rtNavBarGroupBySection">
+  <strong><label for="group_table_by">Group table by</label></strong><br />
+  <select name="group_key" id="group_table_by">
+<option value="NONE">-- no grouping --</option>
+<option value="basin_cd">Major River Basin</option>
+<option value="county_cd">County</option>
+<option value="huc_cd">Hydrologic Unit</option>
+
+  </select>
+  </span>
+
+  <span class="rtnavbarcol" id="rtNavBarSearchSection">
+  <strong><label for="search_site_no_station_nm">Select sites by number or name</label></strong><br />
+  <input type="text" name="search_site_no_station_nm" class="trackChange" value="" size="25" id="search_site_no_station_nm" alt="search site number station" onFocus="init()"/>
+  </span>
+  
+  <span class="rtnavbarcol" id="rtNavBarGoSection">
+  <input type="submit" value="go" onclick="return rt_navigation_manager('')" /><br />
+  </span>
+ 
+  <span class="rtnavbarcol" id="rtNavBarMapSection">
+  <strong><input type="submit" value="show sites on a map" onclick="return rt_navigation_manager('nwis_mapper')" /></strong>
+  </span>
+
+</div>
+<div class='clear'></div>
+<input type="hidden" name="site_no_name_select" id="site_no_name_select" value="" />
+</form>
+
+
+<!-- end of selection table -->
+ </td></tr></table>
+<!-- start of data table -->
+<div align="center" valign="bottom" nowrap="nowrap">
+      <a href="/ga/nwis/current?submitted_form=introduction">Customize table to display other current-condition parameters</a><br/>
+<div>
+<table border="0" align="left" cellspacing="1" cellpadding="1">
+ <thead>
+ <tr>
+    <th valign="bottom"  rowspan="1" >
+    Station<br />Number 
+    </th>
+    <th valign="bottom"  rowspan="1" >
+    Station name 
+    </th>
+    <th valign="bottom"  rowspan="1" >
+    Date/Time 
+    </th>
+    <th valign="bottom"  rowspan="1" >
+    Gage<br />height,<br /> feet
+    </th>
+    <th valign="bottom"  rowspan="1" >
+    Dis-<br />charge,<br /> ft3/s
+    </th>
+    <th valign="bottom"  rowspan="1" >
+    Long-<br />term<br />median<br />flow<br />6/30 
+    </th>
+    <th valign="bottom"  rowspan="1" >
+    Reser-<br /> voir<br /> eleva-<br /> tion<br /> above<br /> datum,<br /> feet
+    </th>
+ </tr>
+</thead>
+<!-- end table header -->
+<tbody>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060102"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060102 Tugaloo</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02176930&amp;PARAmeter_cd=00065,00060,00062">02176930</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTOOGA RIVER AT BURRELLS FORD, NR PINE MTN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.71&nbsp;</td><td>48&nbsp;</td><td>80.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02177000&amp;PARAmeter_cd=00065,00060,00062">02177000</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTOOGA RIVER NEAR CLAYTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.19&nbsp;</td><td>209&nbsp;</td><td>452&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02178400&amp;PARAmeter_cd=00065,00060,00062">02178400</a></td><td align="left" nowrap="nowrap">&nbsp;TALLULAH RIVER NEAR CLAYTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.53&nbsp;</td><td>198&nbsp;</td><td>121&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02181350&amp;PARAmeter_cd=00065,00060,00062">02181350</a></td><td align="left" nowrap="nowrap">&nbsp;TALLULAH R AT TERRORA PWRHSE, NR TALLULAH FALLS,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.88&nbsp;</td><td>37&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02181580&amp;PARAmeter_cd=00065,00060,00062">02181580</a></td><td align="left" nowrap="nowrap">&nbsp;TALLULAH RIVER AB POWERHOUSE, NR TALLULAH FALLS,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>5.13&nbsp;</td><td>39&nbsp;</td><td>40.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060103"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060103 Upper Savannah</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02188600&amp;PARAmeter_cd=00065,00060,00062">02188600</a></td><td align="left" nowrap="nowrap">&nbsp;BEAVERDAM CREEK ABOVE ELBERTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.24&nbsp;</td><td>22&nbsp;</td><td>30.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060104"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060104 Broad</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02191227&amp;PARAmeter_cd=00065,00060,00062">02191227</a></td><td align="left" nowrap="nowrap">&nbsp;GROVE CREEK AT US 441 AND GA 15 NEAR COMMERCE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>6.30&nbsp;</td><td>18&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02191300&amp;PARAmeter_cd=00065,00060,00062">02191300</a></td><td align="left" nowrap="nowrap">&nbsp;BROAD RIVER ABOVE CARLTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.17&nbsp;</td><td>317&nbsp;</td><td>660&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02191740&amp;PARAmeter_cd=00065,00060,00062">02191740</a></td><td align="left" nowrap="nowrap">&nbsp;CLOUDS CREEK AT WATSON MILL PARK NR CARLTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>33.39&nbsp;</td><td>17&nbsp;</td><td>23.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02191743&amp;PARAmeter_cd=00065,00060,00062">02191743</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH FORK BROAD RIVER AT CARLTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.85&nbsp;</td><td>73&nbsp;</td><td>86.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02192000&amp;PARAmeter_cd=00065,00060,00062">02192000</a></td><td align="left" nowrap="nowrap">&nbsp;BROAD RIVER NEAR BELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.91&nbsp;</td><td>531&nbsp;</td><td>910&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060105"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060105 Little</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02193340&amp;PARAmeter_cd=00065,00060,00062">02193340</a></td><td align="left" nowrap="nowrap">&nbsp;KETTLE CREEK NEAR WASHINGTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.18&nbsp;</td><td>4.0&nbsp;</td><td>7.30&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02193500&amp;PARAmeter_cd=00065,00060,00062">02193500</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE RIVER NEAR WASHINGTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.20&nbsp;</td><td>24&nbsp;</td><td>55.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060106"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060106 Middle Savannah</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02195320&amp;PARAmeter_cd=00065,00060,00062">02195320</a></td><td align="left" nowrap="nowrap">&nbsp;KIOKEE CREEK AT GA 104, NEAR EVANS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.71&nbsp;</td><td>21&nbsp;</td><td>6.80&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02195520&amp;PARAmeter_cd=00065,00060,00062">02195520</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER NEAR EVANS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:00 EST&nbsp;</td><td>15.19&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02196483&amp;PARAmeter_cd=00065,00060,00062">02196483</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RVR AT STEVENS CREEK DAM NR MORGANA, SC&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:00 EST&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>186.00&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=021964832&amp;PARAmeter_cd=00065,00060,00062">021964832</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER ABOVE AUGUSTA CANAL NEAR BONAIR,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:00 EST&nbsp;</td><td>157.73&nbsp;</td><td>4,810&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02196485&amp;PARAmeter_cd=00065,00060,00062">02196485</a></td><td align="left" nowrap="nowrap">&nbsp;AUGUSTA CANAL NR AUGUSTA, GA (UPPER)&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 21:30 EST&nbsp;</td><td>6.92&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td></tr><tr align="right" valign="top"><td align="left">&nbsp;</td><td align="left" nowrap="nowrap">&nbsp;&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 21:15 EST&nbsp;</td><td>--&nbsp;</td><td>3,030&nbsp;</td><td>2,740&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02196999&amp;PARAmeter_cd=00065,00060,00062">02196999</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RV ABOVE NEW SAV. LOCK AND DAM&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 21:30 EST&nbsp;</td><td>114.49&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02197000&amp;PARAmeter_cd=00065,00060,00062">02197000</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER AT AUGUSTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 21:30 EST&nbsp;</td><td>97.73&nbsp;</td><td>4,680&nbsp;</td><td>6,260&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02197020&amp;PARAmeter_cd=00065,00060,00062">02197020</a></td><td align="left" nowrap="nowrap">&nbsp;SPIRIT CREEK AT US 1, NEAR AUGUSTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.79&nbsp;</td><td>10&nbsp;</td><td>10.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=021973269&amp;PARAmeter_cd=00065,00060,00062">021973269</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER NEAR WAYNESBORO, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>6.96&nbsp;</td><td>4,880&nbsp;</td><td>5,350&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02197500&amp;PARAmeter_cd=00065,00060,00062">02197500</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH R AT BURTONS FERRY BR NR MILLHAVEN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:00 EST&nbsp;</td><td>5.29&nbsp;</td><td>5,480&nbsp;</td><td>6,740&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060108"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060108 Brier</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02197598&amp;PARAmeter_cd=00065,00060,00062">02197598</a></td><td align="left" nowrap="nowrap">&nbsp;BRUSHY CREEK AT CAMPGROUND ROAD, NEAR WRENS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.40&nbsp;</td><td>4.4&nbsp;</td><td>4.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02197830&amp;PARAmeter_cd=00065,00060,00062">02197830</a></td><td align="left" nowrap="nowrap">&nbsp;BRIER CREEK NEAR WAYNESBORO, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>4.83&nbsp;</td><td>140&nbsp;</td><td>224&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198000&amp;PARAmeter_cd=00065,00060,00062">02198000</a></td><td align="left" nowrap="nowrap">&nbsp;BRIER CREEK AT MILLHAVEN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.30&nbsp;</td><td>158&nbsp;</td><td>296&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198100&amp;PARAmeter_cd=00065,00060,00062">02198100</a></td><td align="left" nowrap="nowrap">&nbsp;BEAVERDAM CREEK NEAR SARDIS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.29&nbsp;</td><td>2.6&nbsp;</td><td>4.30&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060109"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060109 Lower Savannah</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198375&amp;PARAmeter_cd=00065,00060,00062">02198375</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER NEAR ESTILL, SC&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 21:00 EST&nbsp;</td><td>4.34&nbsp;</td><td>5,950&nbsp;</td><td>6,170&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198500&amp;PARAmeter_cd=00065,00060,00062">02198500</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER NEAR CLYO, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:00 EST&nbsp;</td><td>4.25&nbsp;</td><td>6,240&nbsp;</td><td>7,620&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198690&amp;PARAmeter_cd=00065,00060,00062">02198690</a></td><td align="left" nowrap="nowrap">&nbsp;EBENEZER CREEK AT SPRINGFIELD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.00&nbsp;</td><td>7.6&nbsp;</td><td>3.70&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198759&amp;PARAmeter_cd=00065,00060,00062">02198759</a></td><td align="left" nowrap="nowrap">&nbsp;BEAR CREEK AT HICKORY BEND, NEAR RINCON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>6.25&nbsp;</td><td>95&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198760&amp;PARAmeter_cd=00065,00060,00062">02198760</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER ABOVE HARDEEVILLE, SC&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 21:15 EST&nbsp;</td><td>6.32&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198810&amp;PARAmeter_cd=00065,00060,00062">02198810</a></td><td align="left" nowrap="nowrap">&nbsp;ABERCORN CREEK NEAR SAVANNAH,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.14&nbsp;</td><td>3,910&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198820&amp;PARAmeter_cd=00065,00060,00062">02198820</a></td><td align="left" nowrap="nowrap">&nbsp;ABERCORN CREEK AT MOUTH NEAR SAVANNAH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.13&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198840&amp;PARAmeter_cd=00065,00060,00062">02198840</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER (I-95) NEAR PORT WENTWORTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 18:00 EDT&nbsp;</td><td>4.65&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198920&amp;PARAmeter_cd=00065,00060,00062">02198920</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER AT GA 25, AT PORT WENTWORTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>-0.63&nbsp;</td><td>49,100&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198950&amp;PARAmeter_cd=00065,00060,00062">02198950</a></td><td align="left" nowrap="nowrap">&nbsp;MIDDLE RIVER AT GA 25 AT PORT WENTWORTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>-0.22&nbsp;</td><td>16,600&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198955&amp;PARAmeter_cd=00065,00060,00062">02198955</a></td><td align="left" nowrap="nowrap">&nbsp;MIDDLE RIVER AT "FISH HOLE" AT PORT WENTWORTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>-1.93&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=021989715&amp;PARAmeter_cd=00065,00060,00062">021989715</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER AT GARDEN CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>-1.59&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=021989773&amp;PARAmeter_cd=00065,00060,00062">021989773</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER AT USACE DOCK, AT SAVANNAH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>-1.46&nbsp;</td><td>103,000&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=021989784&amp;PARAmeter_cd=00065,00060,00062">021989784</a></td><td align="left" nowrap="nowrap">&nbsp;L BACK RIVER ABOVE LUCKNOW CANAL, NR LIMEHOUSE, SC&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.01&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=021989791&amp;PARAmeter_cd=00065,00060,00062">021989791</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE BACK RIVER AT F&amp;W DOCK, NEAR LIMEHOUSE, SC&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.78&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=021989792&amp;PARAmeter_cd=00065,00060,00062">021989792</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE BACK RIVER AT GA 25 AT PORT WENTWORTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>0.65&nbsp;</td><td>8,670&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=0219897993&amp;PARAmeter_cd=00065,00060,00062">0219897993</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER AT ELBA ISLAND, NEAR SAVANNAH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>-1.86&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02198980&amp;PARAmeter_cd=00065,00060,00062">02198980</a></td><td align="left" nowrap="nowrap">&nbsp;SAVANNAH RIVER AT FORT PULASKI, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>-3.22&nbsp;</td><td>146,000&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02199000&amp;PARAmeter_cd=00065,00060,00062">02199000</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH CHANNEL (SAVANNAH RIVER) NEAR SAVANNAH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>-2.96&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060201"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060201 Upper Ogeechee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02200120&amp;PARAmeter_cd=00065,00060,00062">02200120</a></td><td align="left" nowrap="nowrap">&nbsp;OGEECHEE RIVER AT GA 88, NEAR GRANGE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>7.54&nbsp;</td><td>84&nbsp;</td><td>43.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02201000&amp;PARAmeter_cd=00065,00060,00062">02201000</a></td><td align="left" nowrap="nowrap">&nbsp;WILLIAMSON SWAMP CREEK AT DAVISBORO, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.15&nbsp;</td><td>62&nbsp;</td><td>40.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02201230&amp;PARAmeter_cd=00065,00060,00062">02201230</a></td><td align="left" nowrap="nowrap">&nbsp;OGEECHEE RIVER AT MIDVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.10&nbsp;</td><td>284&nbsp;</td><td>236&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060202"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060202 Lower Ogeechee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02202040&amp;PARAmeter_cd=00065,00060,00062">02202040</a></td><td align="left" nowrap="nowrap">&nbsp;OGEECHEE RIVER AT ROCKY FORD RD, NR ROCKY FORD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.58&nbsp;</td><td>157&nbsp;</td><td>293&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02202190&amp;PARAmeter_cd=00065,00060,00062">02202190</a></td><td align="left" nowrap="nowrap">&nbsp;OGEECHEE RIVER AT GA 24, NEAR OLIVER, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>5.79&nbsp;</td><td>276&nbsp;</td><td>268&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02202500&amp;PARAmeter_cd=00065,00060,00062">02202500</a></td><td align="left" nowrap="nowrap">&nbsp;OGEECHEE RIVER NEAR EDEN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>3.30&nbsp;</td><td>337&nbsp;</td><td>787&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02202600&amp;PARAmeter_cd=00065,00060,00062">02202600</a></td><td align="left" nowrap="nowrap">&nbsp;BLACK CREEK NEAR BLITCHTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>2.86&nbsp;</td><td>6.3&nbsp;</td><td>5.20&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02202680&amp;PARAmeter_cd=00065,00060,00062">02202680</a></td><td align="left" nowrap="nowrap">&nbsp;OGEECHEE RIVER AT GA 204, NEAR ELLABELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>5.19&nbsp;</td><td>749&nbsp;</td><td>420&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203536&amp;PARAmeter_cd=00065,00060,00062">02203536</a></td><td align="left" nowrap="nowrap">&nbsp;OGEECHEE RIVER AT US 17, NEAR RICHMOND HILL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.17&nbsp;</td><td>12,300&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060203"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060203 Canoochee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203000&amp;PARAmeter_cd=00065,00060,00062">02203000</a></td><td align="left" nowrap="nowrap">&nbsp;CANOOCHEE RIVER NEAR CLAXTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>1.39&nbsp;</td><td>17&nbsp;</td><td>74.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203518&amp;PARAmeter_cd=00065,00060,00062">02203518</a></td><td align="left" nowrap="nowrap">&nbsp;CANOOCHEE RIVER AT BRIDGE 38, AT FORT STEWART, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>6.64&nbsp;</td><td>250&nbsp;</td><td>181&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02226180&amp;PARAmeter_cd=00065,00060,00062">02226180</a></td><td align="left" nowrap="nowrap">&nbsp;BRUNSWICK RIVER AT ST. SIMONS ISLAND, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>-3.10&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03060204"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03060204 Ogeechee Coastal</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203559&amp;PARAmeter_cd=00065,00060,00062">02203559</a></td><td align="left" nowrap="nowrap">&nbsp;PEACOCK CREEK AT MCINTOSH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>5.71&nbsp;</td><td>54&nbsp;</td><td>5.00&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=022035975&amp;PARAmeter_cd=00065,00060,00062">022035975</a></td><td align="left" nowrap="nowrap">&nbsp;HUDSON CREEK AT MERIDIAN LANDING, NEAR MERIDIAN,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>-3.75&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070101"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070101 Upper Oconee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02217274&amp;PARAmeter_cd=00065,00060,00062">02217274</a></td><td align="left" nowrap="nowrap">&nbsp;WHEELER CREEK AT BILL CHEEK ROAD, NEAR AUBURN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.25&nbsp;</td><td>0.72&nbsp;</td><td>.70&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02217297&amp;PARAmeter_cd=00065,00060,00062">02217297</a></td><td align="left" nowrap="nowrap">&nbsp;MULBERRY CREEK NEAR WINDER, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.50&nbsp;</td><td>26&nbsp;</td><td>41.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02217475&amp;PARAmeter_cd=00065,00060,00062">02217475</a></td><td align="left" nowrap="nowrap">&nbsp;MIDDLE OCONEE RIVER NEAR ARCADE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.11&nbsp;</td><td>136&nbsp;</td><td>188&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02217500&amp;PARAmeter_cd=00065,00060,00062">02217500</a></td><td align="left" nowrap="nowrap">&nbsp;MIDDLE OCONEE RIVER NEAR ATHENS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.52&nbsp;</td><td>250&nbsp;</td><td>257&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02217615&amp;PARAmeter_cd=00065,00060,00062">02217615</a></td><td align="left" nowrap="nowrap">&nbsp;NORTH OCONEE R AT WOODBRIDGE RD, NEAR COMMERCE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.91&nbsp;</td><td>51&nbsp;</td><td>59.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02217643&amp;PARAmeter_cd=00065,00060,00062">02217643</a></td><td align="left" nowrap="nowrap">&nbsp;PARKS CREEK AT LYLE FIELD RD NR JEFFERSON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.15&nbsp;</td><td>1.7&nbsp;</td><td>2.40&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02217770&amp;PARAmeter_cd=00065,00060,00062">02217770</a></td><td align="left" nowrap="nowrap">&nbsp;NORTH OCONEE RIVER AT COLLEGE ST, AT ATHENS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>5.29&nbsp;</td><td>355&nbsp;</td><td>101&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02218300&amp;PARAmeter_cd=00065,00060,00062">02218300</a></td><td align="left" nowrap="nowrap">&nbsp;OCONEE RIVER NEAR PENFIELD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 20:00 EDT&nbsp;</td><td>3.63&nbsp;</td><td>590&nbsp;</td><td>611&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02218565&amp;PARAmeter_cd=00065,00060,00062">02218565</a></td><td align="left" nowrap="nowrap">&nbsp;APALACHEE RIVER AT FENCE ROAD, NEAR DACULA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.41&nbsp;</td><td>7.9&nbsp;</td><td>2.90&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02219000&amp;PARAmeter_cd=00065,00060,00062">02219000</a></td><td align="left" nowrap="nowrap">&nbsp;APALACHEE RIVER NEAR BOSTWICK, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.51&nbsp;</td><td>307&nbsp;</td><td>116&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02220788&amp;PARAmeter_cd=00065,00060,00062">02220788</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE RIVER AT NEWBORN RD NEAR NEWBORN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.46&nbsp;</td><td>7.4&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02220900&amp;PARAmeter_cd=00065,00060,00062">02220900</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE RIVER NEAR EATONTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.29&nbsp;</td><td>57&nbsp;</td><td>68.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02221525&amp;PARAmeter_cd=00065,00060,00062">02221525</a></td><td align="left" nowrap="nowrap">&nbsp;MURDER CREEK BELOW EATONTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.38&nbsp;</td><td>22&nbsp;</td><td>55.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070102"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070102 Lower Oconee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02223000&amp;PARAmeter_cd=00065,00060,00062">02223000</a></td><td align="left" nowrap="nowrap">&nbsp;OCONEE RIVER AT MILLEDGEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>7.85&nbsp;</td><td>696&nbsp;</td><td>1,240&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02223056&amp;PARAmeter_cd=00065,00060,00062">02223056</a></td><td align="left" nowrap="nowrap">&nbsp;OCONEE RIVER AT AVANT MINE, NEAR OCONEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.95&nbsp;</td><td>993&nbsp;</td><td>1,100&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02223110&amp;PARAmeter_cd=00065,00060,00062">02223110</a></td><td align="left" nowrap="nowrap">&nbsp;BUFFALO CREEK AT GA 272, NEAR OCONEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>7.16&nbsp;</td><td>44&nbsp;</td><td>45.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02223190&amp;PARAmeter_cd=00065,00060,00062">02223190</a></td><td align="left" nowrap="nowrap">&nbsp;COMMISSIONER CREEK AT US 441, AT MCINTYRE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>8.30&nbsp;</td><td>52&nbsp;</td><td>24.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02223248&amp;PARAmeter_cd=00065,00060,00062">02223248</a></td><td align="left" nowrap="nowrap">&nbsp;OCONEE RIVER NEAR OCONEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.16&nbsp;</td><td>1,250&nbsp;</td><td>1,470&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02223360&amp;PARAmeter_cd=00065,00060,00062">02223360</a></td><td align="left" nowrap="nowrap">&nbsp;BIG SANDY CREEK AT US 441, NEAR IRWINTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.16&nbsp;</td><td>17&nbsp;</td><td>12.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02223500&amp;PARAmeter_cd=00065,00060,00062">02223500</a></td><td align="left" nowrap="nowrap">&nbsp;OCONEE RIVER AT DUBLIN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.62&nbsp;</td><td>696&nbsp;</td><td>1,700&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02224500&amp;PARAmeter_cd=00065,00060,00062">02224500</a></td><td align="left" nowrap="nowrap">&nbsp;OCONEE RIVER NEAR MOUNT VERNON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.14&nbsp;</td><td>971&nbsp;</td><td>1,870&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070103"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070103 Upper Ocmulgee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203603&amp;PARAmeter_cd=00065,00060,00062">02203603</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH RIVER AT SPRINGDALE ROAD, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.50&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203655&amp;PARAmeter_cd=00065,00060,00062">02203655</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH RIVER AT FORREST PARK ROAD, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.34&nbsp;</td><td>8.2&nbsp;</td><td>13.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203700&amp;PARAmeter_cd=00065,00060,00062">02203700</a></td><td align="left" nowrap="nowrap">&nbsp;INTRENCHMENT CR AT CONSTITUTION RD, NR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.18&nbsp;</td><td>3.0&nbsp;</td><td>5.20&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203831&amp;PARAmeter_cd=00065,00060,00062">02203831</a></td><td align="left" nowrap="nowrap">&nbsp;DOOLITTLE CREEK AT FLAT SHOALS RD, NR DECATUR, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.07&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203863&amp;PARAmeter_cd=00065,00060,00062">02203863</a></td><td align="left" nowrap="nowrap">&nbsp;SHOAL CREEK AT COLUMBIA DRIVE NEAR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>3.60&nbsp;</td><td>5.6&nbsp;</td><td>5.50&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203873&amp;PARAmeter_cd=00065,00060,00062">02203873</a></td><td align="left" nowrap="nowrap">&nbsp;COBBS CREEK AT RAINBOW DR, NEAR DECATUR, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.06&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203900&amp;PARAmeter_cd=00065,00060,00062">02203900</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH RIVER AT FLAKES MILL ROAD NR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.28&nbsp;</td><td>43&nbsp;</td><td>77.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203950&amp;PARAmeter_cd=00065,00060,00062">02203950</a></td><td align="left" nowrap="nowrap">&nbsp;SNAPFINGER CREEK NEAR DECATUR, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>2.63&nbsp;</td><td>4.8&nbsp;</td><td>6.70&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02203960&amp;PARAmeter_cd=00065,00060,00062">02203960</a></td><td align="left" nowrap="nowrap">&nbsp;SNAPFINGER CR AT THOMPSON MILL RD NR LITHONIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.29&nbsp;</td><td>14&nbsp;</td><td>38.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02204037&amp;PARAmeter_cd=00065,00060,00062">02204037</a></td><td align="left" nowrap="nowrap">&nbsp;POLE BRIDGE CR AT EVANS MILL RD NEAR LITHONIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.15&nbsp;</td><td>5.2&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02204070&amp;PARAmeter_cd=00065,00060,00062">02204070</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH RIVER AT KLONDIKE ROAD, NEAR LITHONIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.13&nbsp;</td><td>116&nbsp;</td><td>167&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02204130&amp;PARAmeter_cd=00065,00060,00062">02204130</a></td><td align="left" nowrap="nowrap">&nbsp;HONEY CREEK AT GA 212, NEAR CONYERS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.63&nbsp;</td><td>6.3&nbsp;</td><td>17.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02204285&amp;PARAmeter_cd=00065,00060,00062">02204285</a></td><td align="left" nowrap="nowrap">&nbsp;PATES CREEK NEAR FLIPPEN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.87&nbsp;</td><td>16&nbsp;</td><td>15.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02204520&amp;PARAmeter_cd=00065,00060,00062">02204520</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH RIVER AT GA 81, AT SNAPPING SHOALS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>6.78&nbsp;</td><td>201&nbsp;</td><td>463&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02205522&amp;PARAmeter_cd=00065,00060,00062">02205522</a></td><td align="left" nowrap="nowrap">&nbsp;PEW CREEK AT PATTERSON RD, NEAR LAWRENCEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.41&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02205865&amp;PARAmeter_cd=00065,00060,00062">02205865</a></td><td align="left" nowrap="nowrap">&nbsp;SWEETWATER CREEK AT CLUB DRIVE NEAR LILBURN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.52&nbsp;</td><td>3.9&nbsp;</td><td>6.80&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207120&amp;PARAmeter_cd=00065,00060,00062">02207120</a></td><td align="left" nowrap="nowrap">&nbsp;YELLOW RIVER AT GA 124, NEAR LITHONIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.87&nbsp;</td><td>72&nbsp;</td><td>111&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207130&amp;PARAmeter_cd=00065,00060,00062">02207130</a></td><td align="left" nowrap="nowrap">&nbsp;STONE MTN CR AT SILVER HILL RD, NEAR STONE MTN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.15&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207135&amp;PARAmeter_cd=00065,00060,00062">02207135</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE STONE MTN CR NEAR STONE MOUNTAIN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.26&nbsp;</td><td>0.77&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207160&amp;PARAmeter_cd=00065,00060,00062">02207160</a></td><td align="left" nowrap="nowrap">&nbsp;STONE MOUNTAIN CREEK AT GA 124, NEAR LITHONIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.76&nbsp;</td><td>15&nbsp;</td><td>10.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207185&amp;PARAmeter_cd=00065,00060,00062">02207185</a></td><td align="left" nowrap="nowrap">&nbsp;NO BUSINESS CREEK AT LEE ROAD, BELOW SNELLVILLE,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.05&nbsp;</td><td>5.0&nbsp;</td><td>4.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207200&amp;PARAmeter_cd=00065,00060,00062">02207200</a></td><td align="left" nowrap="nowrap">&nbsp;SWIFT CREEK NEAR LITHONIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td><a href="#Temporarily_unavailable">***</a>&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207220&amp;PARAmeter_cd=00065,00060,00062">02207220</a></td><td align="left" nowrap="nowrap">&nbsp;YELLOW RIVER AT PLEASANT HILL ROAD, NR LITHONIA,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.59&nbsp;</td><td>143&nbsp;</td><td>134&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207300&amp;PARAmeter_cd=00065,00060,00062">02207300</a></td><td align="left" nowrap="nowrap">&nbsp;YELLOW RIVER AT MILSTEAD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>5.10&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207335&amp;PARAmeter_cd=00065,00060,00062">02207335</a></td><td align="left" nowrap="nowrap">&nbsp;YELLOW RIVER AT GEES MILL ROAD, NEAR MILSTEAD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.06&nbsp;</td><td>206&nbsp;</td><td>160&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207385&amp;PARAmeter_cd=00065,00060,00062">02207385</a></td><td align="left" nowrap="nowrap">&nbsp;BIG HAYNES CREEK AT LENORA ROAD, NR SNELLVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.77&nbsp;</td><td>7.2&nbsp;</td><td>9.80&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207400&amp;PARAmeter_cd=00065,00060,00062">02207400</a></td><td align="left" nowrap="nowrap">&nbsp;BRUSHY FORK CREEK AT BEAVER ROAD, NR LOGANVILLE,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 19:00 EDT&nbsp;</td><td>1.23&nbsp;</td><td>2.6&nbsp;</td><td>4.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207414&amp;PARAmeter_cd=00065,00060,00062">02207414</a></td><td align="left" nowrap="nowrap">&nbsp;RANDY POYNTER LAKE AT SPILLWAY, NEAR MILSTEAD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>733.70&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207418&amp;PARAmeter_cd=00065,00060,00062">02207418</a></td><td align="left" nowrap="nowrap">&nbsp;BIG HAYNES CREEK AT JACK TURNER DAM,NR MILSTEAD GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.22&nbsp;</td><td>27&nbsp;</td><td>34.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207435&amp;PARAmeter_cd=00065,00060,00062">02207435</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE HAYNES CREEK AT DIAL MILL RD NR MILSTEAD GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.22&nbsp;</td><td>14&nbsp;</td><td>17.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02207448&amp;PARAmeter_cd=00065,00060,00062">02207448</a></td><td align="left" nowrap="nowrap">&nbsp;BIG HAYNES CREEK AT BALD ROCK ROAD, NR MILSTEAD GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.63&nbsp;</td><td>14&nbsp;</td><td>32.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208000&amp;PARAmeter_cd=00065,00060,00062">02208000</a></td><td align="left" nowrap="nowrap">&nbsp;YELLOW RIVER ROCKY PLAINS RD NR ROCKY PLAINS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.95&nbsp;</td><td>195&nbsp;</td><td>227&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208050&amp;PARAmeter_cd=00065,00060,00062">02208050</a></td><td align="left" nowrap="nowrap">&nbsp;ALCOVY RIVER NEAR LAWRENCEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>-0.15&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208130&amp;PARAmeter_cd=00065,00060,00062">02208130</a></td><td align="left" nowrap="nowrap">&nbsp;SHOAL CREEK AT PAPER MILL RD, NR LAWRENCEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.79&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208150&amp;PARAmeter_cd=00065,00060,00062">02208150</a></td><td align="left" nowrap="nowrap">&nbsp;ALCOVY RIVER AT NEW HOPE ROAD, NEAR GRAYSON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.69&nbsp;</td><td>86&nbsp;</td><td>17.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208450&amp;PARAmeter_cd=00065,00060,00062">02208450</a></td><td align="left" nowrap="nowrap">&nbsp;ALCOVY RIVER ABOVE COVINGTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.82&nbsp;</td><td>89&nbsp;</td><td>97.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208485&amp;PARAmeter_cd=00065,00060,00062">02208485</a></td><td align="left" nowrap="nowrap">&nbsp;CORNISH CREEK AT LOWER JERSEY RD, NR COVINGTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.06&nbsp;</td><td>6.7&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208487&amp;PARAmeter_cd=00065,00060,00062">02208487</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE CORNISH CR (COUNTY ROAD 95) NR OXFORD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>0.54&nbsp;</td><td>2.3&nbsp;</td><td>2.10&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02208493&amp;PARAmeter_cd=00065,00060,00062">02208493</a></td><td align="left" nowrap="nowrap">&nbsp;CORNISH CREEK AT HAZELBRAND RD NR COVINGTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>6.48&nbsp;</td><td>6.1&nbsp;</td><td>3.50&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02209000&amp;PARAmeter_cd=00065,00060,00062">02209000</a></td><td align="left" nowrap="nowrap">&nbsp;ALCOVY RIVER BELOW COVINGTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.45&nbsp;</td><td>137&nbsp;</td><td>117&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02209360&amp;PARAmeter_cd=00065,00060,00062">02209360</a></td><td align="left" nowrap="nowrap">&nbsp;EAST BEAR CREEK AT POPLAR ROAD, NR MANSFIELD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.77&nbsp;</td><td>0.57&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02210500&amp;PARAmeter_cd=00065,00060,00062">02210500</a></td><td align="left" nowrap="nowrap">&nbsp;OCMULGEE RIVER NEAR JACKSON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>4.04&nbsp;</td><td>410&nbsp;</td><td>741&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02211375&amp;PARAmeter_cd=00065,00060,00062">02211375</a></td><td align="left" nowrap="nowrap">&nbsp;CABIN CREEK AT NORTH SECOND STREET, NR GRIFFIN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.64&nbsp;</td><td>3.0&nbsp;</td><td>3.50&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02211800&amp;PARAmeter_cd=00065,00060,00062">02211800</a></td><td align="left" nowrap="nowrap">&nbsp;TOWALIGA RIVER AT GA 83 NEAR JULIETTE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.45&nbsp;</td><td>345&nbsp;</td><td>88.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02212600&amp;PARAmeter_cd=00065,00060,00062">02212600</a></td><td align="left" nowrap="nowrap">&nbsp;FALLING CREEK NEAR JULIETTE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.13&nbsp;</td><td>3.4&nbsp;</td><td>9.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02212735&amp;PARAmeter_cd=00065,00060,00062">02212735</a></td><td align="left" nowrap="nowrap">&nbsp;OCMULGEE RIVER AT GA 18, AT DAMES FERRY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.40&nbsp;</td><td>585&nbsp;</td><td>810&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02213000&amp;PARAmeter_cd=00065,00060,00062">02213000</a></td><td align="left" nowrap="nowrap">&nbsp;OCMULGEE RIVER AT MACON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>5.86&nbsp;</td><td>614&nbsp;</td><td>1,160&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02213500&amp;PARAmeter_cd=00065,00060,00062">02213500</a></td><td align="left" nowrap="nowrap">&nbsp;TOBESOFKEE CREEK NEAR MACON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.47&nbsp;</td><td>35&nbsp;</td><td>68.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02214075&amp;PARAmeter_cd=00065,00060,00062">02214075</a></td><td align="left" nowrap="nowrap">&nbsp;ECHECONNEE CREEK AT HOUSTON RD, NEAR BYRON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>6.82&nbsp;</td><td>89&nbsp;</td><td>81.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070104"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070104 Lower Ocmulgee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02214590&amp;PARAmeter_cd=00065,00060,00062">02214590</a></td><td align="left" nowrap="nowrap">&nbsp;BIG INDIAN CREEK AT US 341, NEAR CLINCHFIELD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>14.81&nbsp;</td><td>73&nbsp;</td><td>49.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02215000&amp;PARAmeter_cd=00065,00060,00062">02215000</a></td><td align="left" nowrap="nowrap">&nbsp;OCMULGEE RIVER AT US 341, AT HAWKINSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.57&nbsp;</td><td>1,090&nbsp;</td><td>1,530&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02215100&amp;PARAmeter_cd=00065,00060,00062">02215100</a></td><td align="left" nowrap="nowrap">&nbsp;TUCSAWHATCHEE CREEK NEAR HAWKINSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.93&nbsp;</td><td>9.9&nbsp;</td><td>28.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02215260&amp;PARAmeter_cd=00065,00060,00062">02215260</a></td><td align="left" nowrap="nowrap">&nbsp;OCMULGEE RIVER AT ABBEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.90&nbsp;</td><td>1,220&nbsp;</td><td>1,750&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02215500&amp;PARAmeter_cd=00065,00060,00062">02215500</a></td><td align="left" nowrap="nowrap">&nbsp;OCMULGEE RIVER AT LUMBER CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.39&nbsp;</td><td>1,630&nbsp;</td><td>2,640&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070105"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070105 Little Ocmulgee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02215900&amp;PARAmeter_cd=00065,00060,00062">02215900</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE OCMULGEE RIVER AT GA 149, AT SCOTLAND, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.06&nbsp;</td><td>2.1&nbsp;</td><td>15.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02216180&amp;PARAmeter_cd=00065,00060,00062">02216180</a></td><td align="left" nowrap="nowrap">&nbsp;TURNPIKE CREEK NEAR MCRAE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.55&nbsp;</td><td>1.3&nbsp;</td><td>.000&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070106"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070106 Altamaha</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02224940&amp;PARAmeter_cd=00065,00060,00062">02224940</a></td><td align="left" nowrap="nowrap">&nbsp;ALTAMAHA RIVER AT US 221, NR CHARLOTTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.21&nbsp;</td><td>2,480&nbsp;</td><td>3,030&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02225000&amp;PARAmeter_cd=00065,00060,00062">02225000</a></td><td align="left" nowrap="nowrap">&nbsp;ALTAMAHA RIVER NEAR BAXLEY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.46&nbsp;</td><td>2,800&nbsp;</td><td>4,069&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02226000&amp;PARAmeter_cd=00065,00060,00062">02226000</a></td><td align="left" nowrap="nowrap">&nbsp;ALTAMAHA RIVER AT DOCTORTOWN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.34&nbsp;</td><td>2,650&nbsp;</td><td>5,910&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02226160&amp;PARAmeter_cd=00065,00060,00062">02226160</a></td><td align="left" nowrap="nowrap">&nbsp;ALTAMAHA RIVER NEAR EVERETT CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>7.37&nbsp;</td><td>3,120&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070107"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070107 Ohoopee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02225270&amp;PARAmeter_cd=00065,00060,00062">02225270</a></td><td align="left" nowrap="nowrap">&nbsp;OHOOPEE RIVER AT GA 297, NEAR SWAINSBORO, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>7.73&nbsp;</td><td>15&nbsp;</td><td>33.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02225500&amp;PARAmeter_cd=00065,00060,00062">02225500</a></td><td align="left" nowrap="nowrap">&nbsp;OHOOPEE RIVER NEAR REIDSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.69&nbsp;</td><td>152&nbsp;</td><td>194&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070201"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070201 Satilla</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02226362&amp;PARAmeter_cd=00065,00060,00062">02226362</a></td><td align="left" nowrap="nowrap">&nbsp;SATILLA RIVER AT GA 158, NEAR WAYCROSS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>4.36&nbsp;</td><td>126&nbsp;</td><td>213&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02226500&amp;PARAmeter_cd=00065,00060,00062">02226500</a></td><td align="left" nowrap="nowrap">&nbsp;SATILLA RIVER NEAR WAYCROSS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.91&nbsp;</td><td>140&nbsp;</td><td>170&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02227270&amp;PARAmeter_cd=00065,00060,00062">02227270</a></td><td align="left" nowrap="nowrap">&nbsp;ALABAHA RIVER AT GA 203, NEAR BLACKSHEAR, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.25&nbsp;</td><td>24&nbsp;</td><td>98.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02228000&amp;PARAmeter_cd=00065,00060,00062">02228000</a></td><td align="left" nowrap="nowrap">&nbsp;SATILLA RIVER AT ATKINSON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>4.26&nbsp;</td><td>278&nbsp;</td><td>462&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02228070&amp;PARAmeter_cd=00065,00060,00062">02228070</a></td><td align="left" nowrap="nowrap">&nbsp;SATILLA RIVER AT US 17, AT WOODBINE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.33&nbsp;</td><td>24,400&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070202"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070202 Little Satilla</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02227500&amp;PARAmeter_cd=00065,00060,00062">02227500</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE SATILLA RIVER NEAR OFFERMAN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>7.52&nbsp;</td><td>530&nbsp;</td><td>53.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070203"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070203 Cumberland-St. Simons</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02228295&amp;PARAmeter_cd=00065,00060,00062">02228295</a></td><td align="left" nowrap="nowrap">&nbsp;CUMBERLAND SOUND AT SEA CAMP DOCK, NR ST MARYS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>-2.45&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03070204"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03070204 St. Marys</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02231000&amp;PARAmeter_cd=00065,00060,00062">02231000</a></td><td align="left" nowrap="nowrap">&nbsp;ST. MARYS RIVER NEAR MACCLENNY, FL&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.52&nbsp;</td><td>37&nbsp;</td><td>214&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02231175&amp;PARAmeter_cd=00065,00060,00062">02231175</a></td><td align="left" nowrap="nowrap">&nbsp;ST MARYS RIVER AT FERRY LANDING NEAR FOLKSTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.72&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02231254&amp;PARAmeter_cd=00065,00060,00062">02231254</a></td><td align="left" nowrap="nowrap">&nbsp;ST MARY'S RIVER AT I-95, NEAR KINGSLAND, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>0.68&nbsp;</td><td>27,200&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03110201"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03110201 Upper Suwannee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02314495&amp;PARAmeter_cd=00065,00060,00062">02314495</a></td><td align="left" nowrap="nowrap">&nbsp;SUWANNEE RIVER ABOVE FARGO, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>7.46&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02314500&amp;PARAmeter_cd=00065,00060,00062">02314500</a></td><td align="left" nowrap="nowrap">&nbsp;SUWANNEE RIVER AT US 441, AT FARGO, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.71&nbsp;</td><td>382&nbsp;</td><td>224&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03110202"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03110202 Alapaha</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02315920&amp;PARAmeter_cd=00065,00060,00062">02315920</a></td><td align="left" nowrap="nowrap">&nbsp;ALAPAHA RIVER AT GA 125/32 NEAR IRWINVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.78&nbsp;</td><td>25&nbsp;</td><td>7.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02316000&amp;PARAmeter_cd=00065,00060,00062">02316000</a></td><td align="left" nowrap="nowrap">&nbsp;ALAPAHA RIVER NEAR ALAPAHA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.88&nbsp;</td><td>9.6&nbsp;</td><td>54.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02317500&amp;PARAmeter_cd=00065,00060,00062">02317500</a></td><td align="left" nowrap="nowrap">&nbsp;ALAPAHA RIVER AT STATENVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.13&nbsp;</td><td>186&nbsp;</td><td>228&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03110203"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03110203 Withlacoochee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=023177483&amp;PARAmeter_cd=00065,00060,00062">023177483</a></td><td align="left" nowrap="nowrap">&nbsp;WITHLACOOCHEE RIVER AT MCMILLAN RD,NEAR BEMISS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.89&nbsp;</td><td>19&nbsp;</td><td>53.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02317755&amp;PARAmeter_cd=00065,00060,00062">02317755</a></td><td align="left" nowrap="nowrap">&nbsp;WITHLACOOCHEE RIVER AT US 41 NEAR VALDOSTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.71&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02318500&amp;PARAmeter_cd=00065,00060,00062">02318500</a></td><td align="left" nowrap="nowrap">&nbsp;WITHLACOOCHEE RIVER AT US 84, NEAR QUITMAN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.97&nbsp;</td><td>44&nbsp;</td><td>184&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02318700&amp;PARAmeter_cd=00065,00060,00062">02318700</a></td><td align="left" nowrap="nowrap">&nbsp;OKAPILCO CREEK AT GA 333, NEAR QUITMAN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>4.16&nbsp;</td><td>28&nbsp;</td><td>7.00&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02319000&amp;PARAmeter_cd=00065,00060,00062">02319000</a></td><td align="left" nowrap="nowrap">&nbsp;WITHLACOOCHEE RIVER NEAR PINETTA, FLA.&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>6.83&nbsp;</td><td>271&nbsp;</td><td>469&nbsp;</td><td>--&nbsp;</td></tr><tr align="right" valign="top"><td align="left">&nbsp;</td><td align="left" nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Backup]&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>6.83&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03110204"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03110204 Little</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02317797&amp;PARAmeter_cd=00065,00060,00062">02317797</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE RIVER AT UPPER TY TY ROAD, NEAR TIFTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>0.14&nbsp;</td><td>0.60&nbsp;</td><td>.37&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02318000&amp;PARAmeter_cd=00065,00060,00062">02318000</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE RIVER NEAR ADEL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.28&nbsp;</td><td>0.94&nbsp;</td><td>87.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02318380&amp;PARAmeter_cd=00065,00060,00062">02318380</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE RIVER AT GA 122, NEAR HAHIRA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>4.04&nbsp;</td><td>43&nbsp;</td><td>103&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03120002"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03120002 Upper Ochlockonee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02327355&amp;PARAmeter_cd=00065,00060,00062">02327355</a></td><td align="left" nowrap="nowrap">&nbsp;OCHLOCKONEE RIVER AT GA 188, NEAR COOLIDGE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.09&nbsp;</td><td>63&nbsp;</td><td>38.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02327500&amp;PARAmeter_cd=00065,00060,00062">02327500</a></td><td align="left" nowrap="nowrap">&nbsp;OCHLOCKONEE RIVER NEAR THOMASVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.04&nbsp;</td><td>207&nbsp;</td><td>127&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03120003"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03120003 Lower Ochlockonee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02328522&amp;PARAmeter_cd=00065,00060,00062">02328522</a></td><td align="left" nowrap="nowrap">&nbsp;OCHLOCKONEE RIVER NR CONCORD, FLA.&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>25.16&nbsp;</td><td>174&nbsp;</td><td>208&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02329342&amp;PARAmeter_cd=00065,00060,00062">02329342</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE ATTAPULGUS CREEK AT ATTAPULGUS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.39&nbsp;</td><td>8.3&nbsp;</td><td>8.50&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130001"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130001 Upper Chattahoochee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02330450&amp;PARAmeter_cd=00065,00060,00062">02330450</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT HELEN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.51&nbsp;</td><td>62&nbsp;</td><td>79.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02331000&amp;PARAmeter_cd=00065,00060,00062">02331000</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER NEAR LEAF, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.65&nbsp;</td><td>172&nbsp;</td><td>258&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=023312495&amp;PARAmeter_cd=00065,00060,00062">023312495</a></td><td align="left" nowrap="nowrap">&nbsp;SOQUE RIVER AT GA 197, NEAR CLARKESVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.50&nbsp;</td><td>109&nbsp;</td><td>118&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02331600&amp;PARAmeter_cd=00065,00060,00062">02331600</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER NEAR CORNELIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.67&nbsp;</td><td>327&nbsp;</td><td>569&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02333500&amp;PARAmeter_cd=00065,00060,00062">02333500</a></td><td align="left" nowrap="nowrap">&nbsp;CHESTATEE RIVER NEAR DAHLONEGA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.94&nbsp;</td><td>130&nbsp;</td><td>216&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334400&amp;PARAmeter_cd=00065,00060,00062">02334400</a></td><td align="left" nowrap="nowrap">&nbsp;LAKE SIDNEY LANIER NEAR BUFORD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>1,067.56&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334401&amp;PARAmeter_cd=00065,00060,00062">02334401</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER (BUFORD DAM) NR BUFORD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>912.27&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334430&amp;PARAmeter_cd=00065,00060,00062">02334430</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT BUFORD DAM, NEAR BUFORD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>-0.52&nbsp;</td><td>644&nbsp;</td><td>1,419&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334480&amp;PARAmeter_cd=00065,00060,00062">02334480</a></td><td align="left" nowrap="nowrap">&nbsp;RICHLAND CREEK AT SUWANEE DAM ROAD, NEAR BUFORD,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>0.60&nbsp;</td><td>14&nbsp;</td><td>9.40&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334578&amp;PARAmeter_cd=00065,00060,00062">02334578</a></td><td align="left" nowrap="nowrap">&nbsp;LEVEL CREEK AT SUWANEE DAM ROAD, NEAR SUWANEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.43&nbsp;</td><td>3.8&nbsp;</td><td>2.30&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334620&amp;PARAmeter_cd=00065,00060,00062">02334620</a></td><td align="left" nowrap="nowrap">&nbsp;DICK CREEK AT OLD ATLANTA RD, NEAR SUWANEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.73&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td></tr><tr align="right" valign="top"><td align="left">&nbsp;</td><td align="left" nowrap="nowrap">&nbsp;&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 17:00 EDT&nbsp;</td><td>--&nbsp;</td><td>2.0&nbsp;</td><td>5.20&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334653&amp;PARAmeter_cd=00065,00060,00062">02334653</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE R 0.76 MI US MCGINNIS FY SUWANEE GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>4.36&nbsp;</td><td>1,600&nbsp;</td><td>1,050&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02334885&amp;PARAmeter_cd=00065,00060,00062">02334885</a></td><td align="left" nowrap="nowrap">&nbsp;SUWANEE CREEK AT SUWANEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>0.95&nbsp;</td><td>18&nbsp;</td><td>35.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335000&amp;PARAmeter_cd=00065,00060,00062">02335000</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER NEAR NORCROSS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>4.50&nbsp;</td><td>2,850&nbsp;</td><td>1,480&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335350&amp;PARAmeter_cd=00065,00060,00062">02335350</a></td><td align="left" nowrap="nowrap">&nbsp;CROOKED CREEK NEAR NORCROSS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.97&nbsp;</td><td>8.9&nbsp;</td><td>3.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335450&amp;PARAmeter_cd=00065,00060,00062">02335450</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER ABOVE ROSWELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.17&nbsp;</td><td>998&nbsp;</td><td>1,320&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335580&amp;PARAmeter_cd=00065,00060,00062">02335580</a></td><td align="left" nowrap="nowrap">&nbsp;BIG CREEK AT GA 9, NEAR CUMMING, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.77&nbsp;</td><td>16&nbsp;</td><td>21.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335700&amp;PARAmeter_cd=00065,00060,00062">02335700</a></td><td align="left" nowrap="nowrap">&nbsp;BIG CREEK NEAR ALPHARETTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.60&nbsp;</td><td>17&nbsp;</td><td>56.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335757&amp;PARAmeter_cd=00065,00060,00062">02335757</a></td><td align="left" nowrap="nowrap">&nbsp;BIG CREEK BELOW HOG WALLOW CREEK AT ROSWELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.64&nbsp;</td><td>51&nbsp;</td><td>63.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335790&amp;PARAmeter_cd=00065,00060,00062">02335790</a></td><td align="left" nowrap="nowrap">&nbsp;WILLEO CREEK AT GA 120, NEAR ROSWELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.66&nbsp;</td><td>3.4&nbsp;</td><td>4.70&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335810&amp;PARAmeter_cd=00065,00060,00062">02335810</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT MORGAN FALLS DAM, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>865.12&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335815&amp;PARAmeter_cd=00065,00060,00062">02335815</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER BELOW MORGAN FALLS DAM, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>811.10&nbsp;</td><td>1,080&nbsp;</td><td>1,150&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=023358685&amp;PARAmeter_cd=00065,00060,00062">023358685</a></td><td align="left" nowrap="nowrap">&nbsp;SEWELL MILL CREEK AT GA 120, NEAR MARIETTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.24&nbsp;</td><td>2.2&nbsp;</td><td>7.40&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335870&amp;PARAmeter_cd=00065,00060,00062">02335870</a></td><td align="left" nowrap="nowrap">&nbsp;SOPE CREEK NEAR MARIETTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.85&nbsp;</td><td>4.9&nbsp;</td><td>21.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335880&amp;PARAmeter_cd=00065,00060,00062">02335880</a></td><td align="left" nowrap="nowrap">&nbsp;CHATT R AT POWERS FY &amp; I-285 NR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.72&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335910&amp;PARAmeter_cd=00065,00060,00062">02335910</a></td><td align="left" nowrap="nowrap">&nbsp;ROTTENWOOD CR AT INTERSTATE N PKWY, NR SMYRNA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.21&nbsp;</td><td>5.6&nbsp;</td><td>9.10&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02335990&amp;PARAmeter_cd=00065,00060,00062">02335990</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT US 41, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>4.46&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336000&amp;PARAmeter_cd=00065,00060,00062">02336000</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.03&nbsp;</td><td>1,190&nbsp;</td><td>1,680&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336030&amp;PARAmeter_cd=00065,00060,00062">02336030</a></td><td align="left" nowrap="nowrap">&nbsp;N.F. PEACHTREE CREEK AT GRAVES RD, NR DORAVILLE,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.68&nbsp;</td><td>0.58&nbsp;</td><td>.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336120&amp;PARAmeter_cd=00065,00060,00062">02336120</a></td><td align="left" nowrap="nowrap">&nbsp;N.F. PEACHTREE CREEK, BUFORD HWY, NEAR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.64&nbsp;</td><td>6.6&nbsp;</td><td>14.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336152&amp;PARAmeter_cd=00065,00060,00062">02336152</a></td><td align="left" nowrap="nowrap">&nbsp;SOUTH FORK PEACHTREE AT CASA DR, NR CLARKSTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>3.12&nbsp;</td><td>1.2&nbsp;</td><td>2.80&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=023362095&amp;PARAmeter_cd=00065,00060,00062">023362095</a></td><td align="left" nowrap="nowrap">&nbsp;BURNT FORK CR AT MILLWOOD WAY NEAR CLARKSTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.26&nbsp;</td><td>1.7&nbsp;</td><td>1.30&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336240&amp;PARAmeter_cd=00065,00060,00062">02336240</a></td><td align="left" nowrap="nowrap">&nbsp;S.F. PEACHTREE CREEK JOHNSON RD, NEAR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.45&nbsp;</td><td>9.8&nbsp;</td><td>10.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336300&amp;PARAmeter_cd=00065,00060,00062">02336300</a></td><td align="left" nowrap="nowrap">&nbsp;PEACHTREE CREEK AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.37&nbsp;</td><td>28&nbsp;</td><td>49.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336313&amp;PARAmeter_cd=00065,00060,00062">02336313</a></td><td align="left" nowrap="nowrap">&nbsp;WOODALL CREEK AT DEFOORS FERRY RD, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.47&nbsp;</td><td>0.56&nbsp;</td><td>.57&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336340&amp;PARAmeter_cd=00065,00060,00062">02336340</a></td><td align="left" nowrap="nowrap">&nbsp;NANCY CREEK AT JOHNSON FERRY RD, AT CHAMBLEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.84&nbsp;</td><td>4.5&nbsp;</td><td>5.50&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336360&amp;PARAmeter_cd=00065,00060,00062">02336360</a></td><td align="left" nowrap="nowrap">&nbsp;NANCY CREEK AT RICKENBACKER DRIVE, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>0.73&nbsp;</td><td>4.4&nbsp;</td><td>10.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336410&amp;PARAmeter_cd=00065,00060,00062">02336410</a></td><td align="left" nowrap="nowrap">&nbsp;NANCY CREEK AT WEST WESLEY ROAD, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.53&nbsp;</td><td>4.1&nbsp;</td><td>17.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130002"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130002 Middle Chattahoochee-Lake Harding</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336490&amp;PARAmeter_cd=00065,00060,00062">02336490</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT GA 280, NEAR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.25&nbsp;</td><td>1,120&nbsp;</td><td>1,700&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336517&amp;PARAmeter_cd=00065,00060,00062">02336517</a></td><td align="left" nowrap="nowrap">&nbsp;PROCTOR CREEK AT HORTENSE WAY, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.59&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=023365218&amp;PARAmeter_cd=00065,00060,00062">023365218</a></td><td align="left" nowrap="nowrap">&nbsp;PROCTOR CREEK TRIB AT SPRING ST, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>4.33&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336526&amp;PARAmeter_cd=00065,00060,00062">02336526</a></td><td align="left" nowrap="nowrap">&nbsp;PROCTOR CREEK AT JACKSON PARKWAY, AT ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.08&nbsp;</td><td>2.8&nbsp;</td><td>5.00&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336635&amp;PARAmeter_cd=00065,00060,00062">02336635</a></td><td align="left" nowrap="nowrap">&nbsp;NICKAJACK CREEK AT US 78/278, NEAR MABLETON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.83&nbsp;</td><td>11&nbsp;</td><td>24.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336728&amp;PARAmeter_cd=00065,00060,00062">02336728</a></td><td align="left" nowrap="nowrap">&nbsp;UTOY CREEK AT GREAT SOUTHWEST PKWY NR ATLANTA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.74&nbsp;</td><td>8.6&nbsp;</td><td>18.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336840&amp;PARAmeter_cd=00065,00060,00062">02336840</a></td><td align="left" nowrap="nowrap">&nbsp;SWEETWATER CREEK,BROWNSVILLE RD,POWDER SPRINGS,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.87&nbsp;</td><td>16&nbsp;</td><td>21.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336870&amp;PARAmeter_cd=00065,00060,00062">02336870</a></td><td align="left" nowrap="nowrap">&nbsp;POWDER SPRINGS CREEK NEAR POWDER SPRINGS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.40&nbsp;</td><td>5.0&nbsp;</td><td>6.40&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336910&amp;PARAmeter_cd=00065,00060,00062">02336910</a></td><td align="left" nowrap="nowrap">&nbsp;SWEETWATER CR 0.05 MI US RR BRIDGE AT AUSTELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.43&nbsp;</td><td>25&nbsp;</td><td>47.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336968&amp;PARAmeter_cd=00065,00060,00062">02336968</a></td><td align="left" nowrap="nowrap">&nbsp;NOSES CREEK AT POWDER SPRINGS RD,POWDER SPRINGS,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.00&nbsp;</td><td>15&nbsp;</td><td>11.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02336986&amp;PARAmeter_cd=00065,00060,00062">02336986</a></td><td align="left" nowrap="nowrap">&nbsp;OLLEY CREEK AT CLAY ROAD, NEAR AUSTELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.95&nbsp;</td><td>3.2&nbsp;</td><td>4.70&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02337000&amp;PARAmeter_cd=00065,00060,00062">02337000</a></td><td align="left" nowrap="nowrap">&nbsp;SWEETWATER CREEK NEAR AUSTELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.88&nbsp;</td><td>50&nbsp;</td><td>144&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02337040&amp;PARAmeter_cd=00065,00060,00062">02337040</a></td><td align="left" nowrap="nowrap">&nbsp;SWEETWATER CREEK BELOW AUSTELL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.78&nbsp;</td><td>45&nbsp;</td><td>81.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02337170&amp;PARAmeter_cd=00065,00060,00062">02337170</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER NEAR FAIRBURN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>0.64&nbsp;</td><td>1,470&nbsp;</td><td>2,240&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02337410&amp;PARAmeter_cd=00065,00060,00062">02337410</a></td><td align="left" nowrap="nowrap">&nbsp;DOG RIVER AT GA 5, NEAR FAIRPLAY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>3.12&nbsp;</td><td>13&nbsp;</td><td>20.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02337498&amp;PARAmeter_cd=00065,00060,00062">02337498</a></td><td align="left" nowrap="nowrap">&nbsp;SNAKE CRK DS SNAKE CRK RESERVIOR NR WHITESBURG, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.33&nbsp;</td><td>11&nbsp;</td><td>12.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02337500&amp;PARAmeter_cd=00065,00060,00062">02337500</a></td><td align="left" nowrap="nowrap">&nbsp;SNAKE CREEK NEAR WHITESBURG, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.81&nbsp;</td><td>13&nbsp;</td><td>33.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02338000&amp;PARAmeter_cd=00065,00060,00062">02338000</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER NEAR WHITESBURG, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>3.59&nbsp;</td><td>1,750&nbsp;</td><td>2,650&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02338500&amp;PARAmeter_cd=00065,00060,00062">02338500</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT GA 100, AT FRANKLIN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>9.31&nbsp;</td><td>2,020&nbsp;</td><td>2,010&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02338523&amp;PARAmeter_cd=00065,00060,00062">02338523</a></td><td align="left" nowrap="nowrap">&nbsp;HILLABAHATCHEE CREEK AT THAXTON RD, NR FRANKLIN,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.90&nbsp;</td><td>9.2&nbsp;</td><td>14.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02338660&amp;PARAmeter_cd=00065,00060,00062">02338660</a></td><td align="left" nowrap="nowrap">&nbsp;NEW RIVER AT GA 100, NEAR CORINTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.81&nbsp;</td><td>12&nbsp;</td><td>43.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02338840&amp;PARAmeter_cd=00065,00060,00062">02338840</a></td><td align="left" nowrap="nowrap">&nbsp;YELLOWJACKET CREEK-HAMMETT RD, BLW HOGANSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>0.72&nbsp;</td><td>20&nbsp;</td><td>32.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02339400&amp;PARAmeter_cd=00065,00060,00062">02339400</a></td><td align="left" nowrap="nowrap">&nbsp;WEST POINT LAKE NEAR WEST POINT, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>631.50&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02339402&amp;PARAmeter_cd=00065,00060,00062">02339402</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER BELOW WEST POINT DAM, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>557.74&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02339500&amp;PARAmeter_cd=00065,00060,00062">02339500</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT WEST POINT, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.11&nbsp;</td><td>725&nbsp;</td><td>3,130&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130003"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130003 Middle Chattahoochee-Walter F</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02341460&amp;PARAmeter_cd=00065,00060,00062">02341460</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT 14TH ST, AT COLUMBUS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>16.50&nbsp;</td><td>1,030&nbsp;</td><td>3,500&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02341800&amp;PARAmeter_cd=00065,00060,00062">02341800</a></td><td align="left" nowrap="nowrap">&nbsp;UPATOI CREEK NEAR COLUMBUS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.81&nbsp;</td><td>147&nbsp;</td><td>179&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02342850&amp;PARAmeter_cd=00065,00060,00062">02342850</a></td><td align="left" nowrap="nowrap">&nbsp;HANNAHATCHEE CREEK AT UNION ROAD, AT UNION, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.77&nbsp;</td><td>81&nbsp;</td><td>28.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02342881&amp;PARAmeter_cd=00065,00060,00062">02342881</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT SPUR 39, NEAR OMAHA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>187.48&nbsp;</td><td>8,430&nbsp;</td><td>3,670&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=0234296910&amp;PARAmeter_cd=00065,00060,00062">0234296910</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT COAST GUARD DOCK AT EUFAULA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 21:00 CDT&nbsp;</td><td>187.80&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02343225&amp;PARAmeter_cd=00065,00060,00062">02343225</a></td><td align="left" nowrap="nowrap">&nbsp;PATAULA CREEK NEAR GEORGETOWN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.89&nbsp;</td><td>139&nbsp;</td><td>122&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02343240&amp;PARAmeter_cd=00065,00060,00062">02343240</a></td><td align="left" nowrap="nowrap">&nbsp;WALTER F. GEORGE RESERVOIR NEAR FORT GAINES, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>187.63&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130004"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130004 Lower Chattahoochee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02343241&amp;PARAmeter_cd=00065,00060,00062">02343241</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE R BELOW WFG DAM AB FT. GAINES, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>102.37&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=023432415&amp;PARAmeter_cd=00065,00060,00062">023432415</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE R .36 MI DS WFG DAM NR FT GAINES, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>102.50&nbsp;</td><td>399&nbsp;</td><td>3,880&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02343801&amp;PARAmeter_cd=00065,00060,00062">02343801</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER NEAR COLUMBIA, AL&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:00 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>102.51&nbsp;</td></tr><tr align="right" valign="top"><td align="left">&nbsp;</td><td align="left" nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAILWATER&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:00 EDT&nbsp;</td><td>78.08&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02343805&amp;PARAmeter_cd=00065,00060,00062">02343805</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTAHOOCHEE RIVER AT MILE 46 NEAR COLUMBIA, ALA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>77.29&nbsp;</td><td>2,670&nbsp;</td><td>4,310&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02343940&amp;PARAmeter_cd=00065,00060,00062">02343940</a></td><td align="left" nowrap="nowrap">&nbsp;SAWHATCHEE CREEK AT CEDAR SPRINGS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.69&nbsp;</td><td>29&nbsp;</td><td>26.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130005"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130005 Upper Flint</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344280&amp;PARAmeter_cd=00065,00060,00062">02344280</a></td><td align="left" nowrap="nowrap">&nbsp;CAMP CREEK AT HELMER ROAD, NEAR FAYETTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>1.17&nbsp;</td><td>16&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344327&amp;PARAmeter_cd=00065,00060,00062">02344327</a></td><td align="left" nowrap="nowrap">&nbsp;MORNING CRK AT WESTBRIDGE RD, NR FAYETTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>4.44&nbsp;</td><td>16&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344350&amp;PARAmeter_cd=00065,00060,00062">02344350</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER NEAR LOVEJOY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.86&nbsp;</td><td>111&nbsp;</td><td>61.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344396&amp;PARAmeter_cd=00065,00060,00062">02344396</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT WOOLSEY ROAD, NEAR WOOLSEY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>39.73&nbsp;</td><td>205&nbsp;</td><td>54.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344423&amp;PARAmeter_cd=00065,00060,00062">02344423</a></td><td align="left" nowrap="nowrap">&nbsp;LAKE HORTON (HEADWATER) NEAR FAYETTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>777.83&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344424&amp;PARAmeter_cd=00065,00060,00062">02344424</a></td><td align="left" nowrap="nowrap">&nbsp;LAKE HORTON (TAILRACE) NEAR FAYETTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>746.34&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344478&amp;PARAmeter_cd=00065,00060,00062">02344478</a></td><td align="left" nowrap="nowrap">&nbsp;SHOAL CREEK AT SHOAL CREEK ROAD, NEAR GRIFFIN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.43&nbsp;</td><td>2.8&nbsp;</td><td>3.50&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344500&amp;PARAmeter_cd=00065,00060,00062">02344500</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER NEAR GRIFFIN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.02&nbsp;</td><td>329&nbsp;</td><td>116&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344605&amp;PARAmeter_cd=00065,00060,00062">02344605</a></td><td align="left" nowrap="nowrap">&nbsp;LINE CREEK BELOW GA 54, NEAR PEACHTREE CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.48&nbsp;</td><td>18&nbsp;</td><td>2.40&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344620&amp;PARAmeter_cd=00065,00060,00062">02344620</a></td><td align="left" nowrap="nowrap">&nbsp;SHOAL CREEK AT GA54, NEAR SHARPSBURG, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.17&nbsp;</td><td>14&nbsp;</td><td>5.80&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344630&amp;PARAmeter_cd=00065,00060,00062">02344630</a></td><td align="left" nowrap="nowrap">&nbsp;LINE CREEK BLW LAKE MCINTOSH, NR PEACHTREE CITY,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.48&nbsp;</td><td>6.9&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344650&amp;PARAmeter_cd=00065,00060,00062">02344650</a></td><td align="left" nowrap="nowrap">&nbsp;LAKE KEDRON NEAR PEACHTREE CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>835.32&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344655&amp;PARAmeter_cd=00065,00060,00062">02344655</a></td><td align="left" nowrap="nowrap">&nbsp;FLAT CR DS OF LAKE KEDRON, NR PEACHTREE CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>2.33&nbsp;</td><td>3.6&nbsp;</td><td>12.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344671&amp;PARAmeter_cd=00065,00060,00062">02344671</a></td><td align="left" nowrap="nowrap">&nbsp;LAKE PEACHTREE (HEADWATER) AT PEACHTREE CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>784.40&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344673&amp;PARAmeter_cd=00065,00060,00062">02344673</a></td><td align="left" nowrap="nowrap">&nbsp;FLAT CREEK (DS OF LAKE) AT PEACHTREE CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>2.37&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344700&amp;PARAmeter_cd=00065,00060,00062">02344700</a></td><td align="left" nowrap="nowrap">&nbsp;LINE CREEK NEAR SENOIA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.33&nbsp;</td><td>14&nbsp;</td><td>38.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344724&amp;PARAmeter_cd=00065,00060,00062">02344724</a></td><td align="left" nowrap="nowrap">&nbsp;WHITEWATER CREEK AT EASTIN RD, NR FAYETTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>4.78&nbsp;</td><td>82&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344736&amp;PARAmeter_cd=00065,00060,00062">02344736</a></td><td align="left" nowrap="nowrap">&nbsp;WHITEWATER CR AT SHERWOOD RD, NR FAYETTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>4.37&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344748&amp;PARAmeter_cd=00065,00060,00062">02344748</a></td><td align="left" nowrap="nowrap">&nbsp;WHITEWATER CR (DS STARRS MILL DAM)FAYETTEVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>1.51&nbsp;</td><td>43&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02344872&amp;PARAmeter_cd=00065,00060,00062">02344872</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER BELOW BIG BRANCH, NEAR MOLENA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>5.37&nbsp;</td><td>305&nbsp;</td><td>178&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02346310&amp;PARAmeter_cd=00065,00060,00062">02346310</a></td><td align="left" nowrap="nowrap">&nbsp;POTATO CREEK AT COUNTY LINE RD, NR ORCHARD HILL,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>4.86&nbsp;</td><td>0.98&nbsp;</td><td>3.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02347500&amp;PARAmeter_cd=00065,00060,00062">02347500</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT US 19, NEAR CARSONVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.12&nbsp;</td><td>581&nbsp;</td><td>890&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130006"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130006 Middle Flint</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02349605&amp;PARAmeter_cd=00065,00060,00062">02349605</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT GA 26, NEAR MONTEZUMA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>2.40&nbsp;</td><td>1,620&nbsp;</td><td>1,830&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02349900&amp;PARAmeter_cd=00065,00060,00062">02349900</a></td><td align="left" nowrap="nowrap">&nbsp;TURKEY CREEK AT BYROMVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>4.41&nbsp;</td><td>3.3&nbsp;</td><td>9.60&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02350512&amp;PARAmeter_cd=00065,00060,00062">02350512</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT GA 32, NEAR OAKFIELD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>4.77&nbsp;</td><td>2,910&nbsp;</td><td>2,250&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130007"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130007 Kinchafoonee-Muckalee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02350600&amp;PARAmeter_cd=00065,00060,00062">02350600</a></td><td align="left" nowrap="nowrap">&nbsp;KINCHAFOONEE CREEK AT PRESTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.07&nbsp;</td><td>139&nbsp;</td><td>88.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02350900&amp;PARAmeter_cd=00065,00060,00062">02350900</a></td><td align="left" nowrap="nowrap">&nbsp;KINCHAFOONEE CREEK AT PINEWOOD ROAD, NR DAWSON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>4.00&nbsp;</td><td>260&nbsp;</td><td>195&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02351500&amp;PARAmeter_cd=00065,00060,00062">02351500</a></td><td align="left" nowrap="nowrap">&nbsp;MUCKALEE CREEK NEAR AMERICUS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.04&nbsp;</td><td>440&nbsp;</td><td>38.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02351890&amp;PARAmeter_cd=00065,00060,00062">02351890</a></td><td align="left" nowrap="nowrap">&nbsp;MUCKALEE CREEK AT GA 195, NEAR LEESBURG, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.10&nbsp;</td><td>235&nbsp;</td><td>175&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130008"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130008 Lower Flint</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02352500&amp;PARAmeter_cd=00065,00060,00062">02352500</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT ALBANY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.84&nbsp;</td><td>2,620&nbsp;</td><td>2,839&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02353000&amp;PARAmeter_cd=00065,00060,00062">02353000</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT NEWTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>5.19&nbsp;</td><td>2,690&nbsp;</td><td>3,830&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02355662&amp;PARAmeter_cd=00065,00060,00062">02355662</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT RIVERVIEW PLANTATION, NR HOPEFUL,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>5.92&nbsp;</td><td>3,880&nbsp;</td><td>3,000&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02356000&amp;PARAmeter_cd=00065,00060,00062">02356000</a></td><td align="left" nowrap="nowrap">&nbsp;FLINT RIVER AT BAINBRIDGE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>19.18&nbsp;</td><td>3,740&nbsp;</td><td>5,450&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130009"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130009 Ichawaynochaway</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02353265&amp;PARAmeter_cd=00065,00060,00062">02353265</a></td><td align="left" nowrap="nowrap">&nbsp;ICHAWAYNOCHAWAY CREEK AT GA 37, NEAR MORGAN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>7.33&nbsp;</td><td>164&nbsp;</td><td>113&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02353400&amp;PARAmeter_cd=00065,00060,00062">02353400</a></td><td align="left" nowrap="nowrap">&nbsp;PACHITLA CREEK NEAR EDISON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.63&nbsp;</td><td>70&nbsp;</td><td>120&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02353500&amp;PARAmeter_cd=00065,00060,00062">02353500</a></td><td align="left" nowrap="nowrap">&nbsp;ICHAWAYNOCHAWAY CREEK AT MILFORD, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.36&nbsp;</td><td>362&nbsp;</td><td>393&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02354350&amp;PARAmeter_cd=00065,00060,00062">02354350</a></td><td align="left" nowrap="nowrap">&nbsp;CHICKASAWHATCHEE CREEK NEAR ALBANY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.29&nbsp;</td><td>50&nbsp;</td><td>17.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02354475&amp;PARAmeter_cd=00065,00060,00062">02354475</a></td><td align="left" nowrap="nowrap">&nbsp;SPRING CREEK NEAR LEARY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.49&nbsp;</td><td>1.0&nbsp;</td><td>.000&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02354500&amp;PARAmeter_cd=00065,00060,00062">02354500</a></td><td align="left" nowrap="nowrap">&nbsp;CHICKASAWHATCHEE CREEK AT ELMODEL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>-0.19&nbsp;</td><td>11&nbsp;</td><td>58.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02354800&amp;PARAmeter_cd=00065,00060,00062">02354800</a></td><td align="left" nowrap="nowrap">&nbsp;ICHAWAYNOCHAWAY CREEK NEAR ELMODEL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.61&nbsp;</td><td>434&nbsp;</td><td>437&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02355350&amp;PARAmeter_cd=00065,00060,00062">02355350</a></td><td align="left" nowrap="nowrap">&nbsp;ICHAWAYNOCHAWAY CREEK BELOW NEWTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>3.36&nbsp;</td><td>505&nbsp;</td><td>490&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130010"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130010 Spring</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02356638&amp;PARAmeter_cd=00065,00060,00062">02356638</a></td><td align="left" nowrap="nowrap">&nbsp;SPRING CREEK APPROX .25 MI US US27 NR COLQUITT, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.95&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02357000&amp;PARAmeter_cd=00065,00060,00062">02357000</a></td><td align="left" nowrap="nowrap">&nbsp;SPRING CREEK NEAR IRON CITY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.10&nbsp;</td><td>37&nbsp;</td><td>139&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02357150&amp;PARAmeter_cd=00065,00060,00062">02357150</a></td><td align="left" nowrap="nowrap">&nbsp;SPRING CREEK NEAR REYNOLDSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>76.97&nbsp;</td><td>295&nbsp;</td><td>370&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03130011"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03130011 Apalachicola</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02357500&amp;PARAmeter_cd=00065,00060,00062">02357500</a></td><td align="left" nowrap="nowrap">&nbsp;LAKE SEMINOLE NEAR CHATTAHOOCHEE, FL&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>77.03&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02357700&amp;PARAmeter_cd=00065,00060,00062">02357700</a></td><td align="left" nowrap="nowrap">&nbsp;APALACHICOLA RIVER BL WOODRUFF DAM, NR SNEADS, FL&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>40.47&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02358000&amp;PARAmeter_cd=00065,00060,00062">02358000</a></td><td align="left" nowrap="nowrap">&nbsp;APALACHICOLA RIVER AT CHATTAHOOCHEE FLA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>40.35&nbsp;</td><td>7,400&nbsp;</td><td>13,500&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03150101"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03150101 Conasauga</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02384500&amp;PARAmeter_cd=00065,00060,00062">02384500</a></td><td align="left" nowrap="nowrap">&nbsp;CONASAUGA RIVER AT GA 286, NEAR ETON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.59&nbsp;</td><td>64&nbsp;</td><td>155&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02384540&amp;PARAmeter_cd=00065,00060,00062">02384540</a></td><td align="left" nowrap="nowrap">&nbsp;MILL CREEK NEAR CRANDALL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.10&nbsp;</td><td>0.79&nbsp;</td><td>7.90&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02385170&amp;PARAmeter_cd=00065,00060,00062">02385170</a></td><td align="left" nowrap="nowrap">&nbsp;COAHULLA CREEK AT KEITHS MILL ROAD, NEAR DALTON,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>7.44&nbsp;</td><td>41&nbsp;</td><td>45.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02385500&amp;PARAmeter_cd=00065,00060,00062">02385500</a></td><td align="left" nowrap="nowrap">&nbsp;MILL CREEK AT DALTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.44&nbsp;</td><td>26&nbsp;</td><td>23.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02385800&amp;PARAmeter_cd=00065,00060,00062">02385800</a></td><td align="left" nowrap="nowrap">&nbsp;HOLLY CREEK NEAR CHATSWORTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.84&nbsp;</td><td>9.2&nbsp;</td><td>38.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02387000&amp;PARAmeter_cd=00065,00060,00062">02387000</a></td><td align="left" nowrap="nowrap">&nbsp;CONASAUGA RIVER AT TILTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.37&nbsp;</td><td>109&nbsp;</td><td>324&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02387010&amp;PARAmeter_cd=00065,00060,00062">02387010</a></td><td align="left" nowrap="nowrap">&nbsp;CONASAUGA RIVER AT SLOAN BRIDGE, BELOW DALTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>-0.16&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03150102"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03150102 Coosawattee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02379500&amp;PARAmeter_cd=00065,00060,00062">02379500</a></td><td align="left" nowrap="nowrap">&nbsp;CARTECAY RIVER NEAR ELLIJAY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.60&nbsp;</td><td>125&nbsp;</td><td>208&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02380500&amp;PARAmeter_cd=00065,00060,00062">02380500</a></td><td align="left" nowrap="nowrap">&nbsp;COOSAWATTEE RIVER NEAR ELLIJAY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.57&nbsp;</td><td>192&nbsp;</td><td>372&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02381090&amp;PARAmeter_cd=00065,00060,00062">02381090</a></td><td align="left" nowrap="nowrap">&nbsp;MOUNTAINTOWN CREEK AT GA 282, NEAR ELLIJAY, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>3.10&nbsp;</td><td>53&nbsp;</td><td>79.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02381400&amp;PARAmeter_cd=00065,00060,00062">02381400</a></td><td align="left" nowrap="nowrap">&nbsp;CARTERS LAKE NEAR CARTERS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>1,070.63&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02381401&amp;PARAmeter_cd=00065,00060,00062">02381401</a></td><td align="left" nowrap="nowrap">&nbsp;CARTERS LAKE TAILRACE NEAR CARTERS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>693.12&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02381600&amp;PARAmeter_cd=00065,00060,00062">02381600</a></td><td align="left" nowrap="nowrap">&nbsp;FAUSETT CREEK NEAR TALKING ROCK, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.17&nbsp;</td><td>2.0&nbsp;</td><td>11.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02382200&amp;PARAmeter_cd=00065,00060,00062">02382200</a></td><td align="left" nowrap="nowrap">&nbsp;TALKING ROCK CREEK NEAR HINTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.98&nbsp;</td><td>44&nbsp;</td><td>111&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02382400&amp;PARAmeter_cd=00065,00060,00062">02382400</a></td><td align="left" nowrap="nowrap">&nbsp;CARTERS RE-REGULATION LAKE NEAR CARTERS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>42.10&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02382500&amp;PARAmeter_cd=00065,00060,00062">02382500</a></td><td align="left" nowrap="nowrap">&nbsp;COOSAWATTEE RIVER AT CARTERS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>4.50&nbsp;</td><td>517&nbsp;</td><td>756&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02383500&amp;PARAmeter_cd=00065,00060,00062">02383500</a></td><td align="left" nowrap="nowrap">&nbsp;COOSAWATTEE RIVER NEAR PINE CHAPEL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.42&nbsp;</td><td>516&nbsp;</td><td>911&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02383520&amp;PARAmeter_cd=00065,00060,00062">02383520</a></td><td align="left" nowrap="nowrap">&nbsp;COOSAWATTEE RIVER AT PINE CHAPEL, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.55&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03150103"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03150103 Oostanaula</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02387500&amp;PARAmeter_cd=00065,00060,00062">02387500</a></td><td align="left" nowrap="nowrap">&nbsp;OOSTANAULA RIVER AT RESACA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>2.40&nbsp;</td><td>679&nbsp;</td><td>1,350&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02387520&amp;PARAmeter_cd=00065,00060,00062">02387520</a></td><td align="left" nowrap="nowrap">&nbsp;OOSTANAULA RIVER AT CALHOUN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>3.19&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02387600&amp;PARAmeter_cd=00065,00060,00062">02387600</a></td><td align="left" nowrap="nowrap">&nbsp;OOTHKALOOGA CREEK AT GA 53 SPUR, AT CALHOUN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>7.05&nbsp;</td><td>25&nbsp;</td><td>27.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02388320&amp;PARAmeter_cd=00065,00060,00062">02388320</a></td><td align="left" nowrap="nowrap">&nbsp;HEATH CREEK NEAR ARMUCHEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.25&nbsp;</td><td>2.8&nbsp;</td><td>3.40&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02388350&amp;PARAmeter_cd=00065,00060,00062">02388350</a></td><td align="left" nowrap="nowrap">&nbsp;ARMUCHEE CREEK AT OLD DALTON ROAD, NEAR ROME, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.93&nbsp;</td><td>44&nbsp;</td><td>53.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02388500&amp;PARAmeter_cd=00065,00060,00062">02388500</a></td><td align="left" nowrap="nowrap">&nbsp;OOSTANAULA RIVER NEAR ROME, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>4.57&nbsp;</td><td>737&nbsp;</td><td>1,400&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02388525&amp;PARAmeter_cd=00065,00060,00062">02388525</a></td><td align="left" nowrap="nowrap">&nbsp;OOSTANAULA RIVER AT US 27, AT ROME, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.81&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03150104"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03150104 Etowah</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02388975&amp;PARAmeter_cd=00065,00060,00062">02388975</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT GA 136, NEAR LANDDRUM, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.92&nbsp;</td><td>110&nbsp;</td><td>121&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02389150&amp;PARAmeter_cd=00065,00060,00062">02389150</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT GA 9, NEAR DAWSONVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.87&nbsp;</td><td>135&nbsp;</td><td>148&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02390000&amp;PARAmeter_cd=00065,00060,00062">02390000</a></td><td align="left" nowrap="nowrap">&nbsp;AMICALOLA CREEK NEAR DAWSONVILLE, GA.&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>0.58&nbsp;</td><td>92&nbsp;</td><td>144&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02390050&amp;PARAmeter_cd=00065,00060,00062">02390050</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT KELLY BRIDGE ROAD, NEAR MATT, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.44&nbsp;</td><td>214&nbsp;</td><td>568&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02390140&amp;PARAmeter_cd=00065,00060,00062">02390140</a></td><td align="left" nowrap="nowrap">&nbsp;SETTINGDOWN CREEK NEAR BALL GROUND, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>1.26&nbsp;</td><td>22&nbsp;</td><td>33.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02390475&amp;PARAmeter_cd=00065,00060,00062">02390475</a></td><td align="left" nowrap="nowrap">&nbsp;LONG SWAMP CREEK AT REAVIS MTN RD, NR NELSON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.12&nbsp;</td><td>31&nbsp;</td><td>35.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02391540&amp;PARAmeter_cd=00065,00060,00062">02391540</a></td><td align="left" nowrap="nowrap">&nbsp;SHARP MTN CREEK AT OLD GA 5, BELOW BALL GROUND, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>3.21&nbsp;</td><td>32&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02391840&amp;PARAmeter_cd=00065,00060,00062">02391840</a></td><td align="left" nowrap="nowrap">&nbsp;HICKORY LOG CREEK NEAR CANTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>0.88&nbsp;</td><td>4.9&nbsp;</td><td>5.00&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02391860&amp;PARAmeter_cd=00065,00060,00062">02391860</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER DOWNSTREAM OF I-575, AT CANTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.39&nbsp;</td><td>391&nbsp;</td><td>519&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02392000&amp;PARAmeter_cd=00065,00060,00062">02392000</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT CANTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:15 EDT&nbsp;</td><td>1.76&nbsp;</td><td>399&nbsp;</td><td>802&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02392360&amp;PARAmeter_cd=00065,00060,00062">02392360</a></td><td align="left" nowrap="nowrap">&nbsp;SHOAL CREEK AT GA 108, NEAR WALESKA, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>2.18&nbsp;</td><td>12&nbsp;</td><td>12.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02392780&amp;PARAmeter_cd=00065,00060,00062">02392780</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE RIVER AT GA 5, NEAR WOODSTOCK, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>0.48&nbsp;</td><td>16&nbsp;</td><td>60.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02392950&amp;PARAmeter_cd=00065,00060,00062">02392950</a></td><td align="left" nowrap="nowrap">&nbsp;NOONDAY CREEK AT HAWKINS STORE RD, NR WOODSTOCK,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>0.70&nbsp;</td><td>5.5&nbsp;</td><td>10.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02392975&amp;PARAmeter_cd=00065,00060,00062">02392975</a></td><td align="left" nowrap="nowrap">&nbsp;NOONDAY CREEK AT SHALLOWFORD ROAD, NR WOODSTOCK,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.40&nbsp;</td><td>9.1&nbsp;</td><td>16.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02393377&amp;PARAmeter_cd=00065,00060,00062">02393377</a></td><td align="left" nowrap="nowrap">&nbsp;BUTLER CREEK AT MACK DOBBS ROAD, NR KENNESAW, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.13&nbsp;</td><td>0.27&nbsp;</td><td>.67&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02393419&amp;PARAmeter_cd=00065,00060,00062">02393419</a></td><td align="left" nowrap="nowrap">&nbsp;ALLATOONA CREEK AT STILESBORO RD, NEAR ACWORTH, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>4.85&nbsp;</td><td>2.7&nbsp;</td><td>3.30&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02393500&amp;PARAmeter_cd=00065,00060,00062">02393500</a></td><td align="left" nowrap="nowrap">&nbsp;ALLATOONA LAKE NEAR CARTERSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>--&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>839.89&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02393501&amp;PARAmeter_cd=00065,00060,00062">02393501</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER ALLATOONA DAM TW, ABV CARTERSVILLE,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>690.08&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02394000&amp;PARAmeter_cd=00065,00060,00062">02394000</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT ALLATOONA DAM, ABV CARTERSVILLE,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.26&nbsp;</td><td>378&nbsp;</td><td>1,050&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02394670&amp;PARAmeter_cd=00065,00060,00062">02394670</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT GA 61, NEAR CARTERSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.91&nbsp;</td><td>403&nbsp;</td><td>783&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02394682&amp;PARAmeter_cd=00065,00060,00062">02394682</a></td><td align="left" nowrap="nowrap">&nbsp;RICHLAND CREEK AT OLD DALLAS RD, NEAR DALLAS, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.32&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02394820&amp;PARAmeter_cd=00065,00060,00062">02394820</a></td><td align="left" nowrap="nowrap">&nbsp;EUHARLEE CREEK AT US 278, AT ROCKMART, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>1.94&nbsp;</td><td>9.0&nbsp;</td><td>16.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02395000&amp;PARAmeter_cd=00065,00060,00062">02395000</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER NEAR KINGSTON,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.35&nbsp;</td><td>542&nbsp;</td><td>1,450&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02395120&amp;PARAmeter_cd=00065,00060,00062">02395120</a></td><td align="left" nowrap="nowrap">&nbsp;TWO RUN CREEK NEAR KINGSTON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.22&nbsp;</td><td>12&nbsp;</td><td>18.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02395980&amp;PARAmeter_cd=00065,00060,00062">02395980</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT GA 1 LOOP, NEAR ROME, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>12.90&nbsp;</td><td>672&nbsp;</td><td>1,340&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02395996&amp;PARAmeter_cd=00065,00060,00062">02395996</a></td><td align="left" nowrap="nowrap">&nbsp;ETOWAH RIVER AT COOSA VALLEY F.G., AT ROME, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>4.36&nbsp;</td><td>--&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03150105"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03150105 Upper Coosa</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02397000&amp;PARAmeter_cd=00065,00060,00062">02397000</a></td><td align="left" nowrap="nowrap">&nbsp;COOSA RIVER (MAYO'S BAR) NEAR ROME, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>10.84&nbsp;</td><td>1,250&nbsp;</td><td>3,120&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02397410&amp;PARAmeter_cd=00065,00060,00062">02397410</a></td><td align="left" nowrap="nowrap">&nbsp;CEDAR CREEK AT GA AVE, AT CEDARTOWN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:30 EDT&nbsp;</td><td>2.56&nbsp;</td><td>28&nbsp;</td><td>28.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02397500&amp;PARAmeter_cd=00065,00060,00062">02397500</a></td><td align="left" nowrap="nowrap">&nbsp;CEDAR CREEK NEAR CEDARTOWN, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>0.59&nbsp;</td><td>38&nbsp;</td><td>68.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02397530&amp;PARAmeter_cd=00065,00060,00062">02397530</a></td><td align="left" nowrap="nowrap">&nbsp;COOSA RIVER AT STATE LINE, AL/GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>13.30&nbsp;</td><td>1,250&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02398000&amp;PARAmeter_cd=00065,00060,00062">02398000</a></td><td align="left" nowrap="nowrap">&nbsp;CHATTOOGA RIVER AT SUMMERVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>2.13&nbsp;</td><td>76&nbsp;</td><td>127&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="03150108"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   03150108 Upper Tallapoosa</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02411930&amp;PARAmeter_cd=00065,00060,00062">02411930</a></td><td align="left" nowrap="nowrap">&nbsp;TALLAPOOSA RIVER BELOW TALLAPOOSA, GEORGIA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.29&nbsp;</td><td>55&nbsp;</td><td>96.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02413000&amp;PARAmeter_cd=00065,00060,00062">02413000</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE TALLAPOOSA RIVER AT US 27, AT CARROLLTON,GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>1.97&nbsp;</td><td>8.3&nbsp;</td><td>52.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=02413210&amp;PARAmeter_cd=00065,00060,00062">02413210</a></td><td align="left" nowrap="nowrap">&nbsp;LITTLE TALLAPOOSA R AT GA 100, NEAR BOWDON, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>2.37&nbsp;</td><td>41&nbsp;</td><td>93.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="06020001"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   06020001 Middle Tennessee-Chickamauga</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=03567340&amp;PARAmeter_cd=00065,00060,00062">03567340</a></td><td align="left" nowrap="nowrap">&nbsp;WEST CHICKAMAUGA CR AT GA 146, NEAR LAKEVIEW, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:15 EDT&nbsp;</td><td>0.83&nbsp;</td><td>53&nbsp;</td><td>69.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=03568933&amp;PARAmeter_cd=00065,00060,00062">03568933</a></td><td align="left" nowrap="nowrap">&nbsp;LOOKOUT CREEK NEAR NEW ENGLAND, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 23:00 EDT&nbsp;</td><td>3.27&nbsp;</td><td>27&nbsp;</td><td>44.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr>
+ <td align="left" colspan="7">
+ <font size="+1">
+ <strong><a name="06020002"><img alt="Group" border="0" width="10" height="10" src="/nwisweb/icons/greendot.gif" />   06020002 Hiwassee</a></strong></font>
+ </td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=03544970&amp;PARAmeter_cd=00065,00060,00062">03544970</a></td><td align="left" nowrap="nowrap">&nbsp;HIWASSEE RIVER AT RIVERSIDE DR, NR HIAWASSEE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>3.46&nbsp;</td><td>151&nbsp;</td><td>59.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+<tr align="right" valign="top">
+ <td align="left"><a href="/ga/nwis/uv/?site_no=03550500&amp;PARAmeter_cd=00065,00060,00062">03550500</a></td><td align="left" nowrap="nowrap">&nbsp;NOTTELY RIVER NEAR BLAIRSVILLE, GA&nbsp;</td><td nowrap="nowrap">&nbsp;06/30 22:45 EDT&nbsp;</td><td>1.60&nbsp;</td><td>55&nbsp;</td><td>94.0&nbsp;</td><td>--&nbsp;</td>
+</tr>
+</tbody></table><br />
+<div class='clear' align='left'><strong>Data status codes:</strong>
+<table><tr>
+  <td width="15"> &nbsp;</td>
+  <td width="25"> <a name="Temporarily_unavailable">***</a> </td>
+  <td width="350"> &nbsp; &nbsp; Temporarily unavailable</td></tr>
+<tr>
+  <td width="15"> &nbsp;</td>
+  <td width="25"> <a name="Parameter_not_determined">--</a> </td>
+  <td width="350"> &nbsp; &nbsp; Parameter not determined</td></tr>
+</table></div>
+
+  
+<div id="nwisweb_footer">
+
+<div class='clear'></div>
+
+<div id="usgssubfooter">
+<hr>
+	<div id="leftsubfooter">
+		<a href="http://water.usgs.gov/contact/gsanswers?pemail=gs-w-ga_NWISWeb_Data_Inquiries&subject=Site+Number:%20&viewnote=%3CH1%3EUSGS+NWIS+Feedback+Request%3C/H1%3E%3Cp%3E%3Cb%3EPlease%20enter%20a%20subject%20in%20the%20form%20below%20that%20briefly%20summarizes%20your%20request%3C/b%3E%3C/p%3E" target="_blank">Questions about sites/data?</a><br />
+		<a href="http://water.usgs.gov/contact/gsanswers?pemail=gs-w-ga_NWISWeb_Maintainer&cemail=gs-w_NWISWeb_Feedback&subject=Site+Number:%20&viewnote=%3CH1%3EUSGS+NWIS+Feedback+Request%3C/H1%3E%3Cp%3E%3Cb%3EPlease%20enter%20a%20subject%20in%20the%20form%20below%20that%20briefly%20summarizes%20your%20request%3C/b%3E%3C/p%3E" target="_blank">Feedback on this web site</a><br />
+		   <a href="http://help.waterdata.usgs.gov/faq/automated-retrievals">Automated retrievals</a>
+ <br />
+		<a href="http://help.waterdata.usgs.gov">Help</a><br />
+	</div>
+
+	<div id="rightsubfooter">
+		<a href="http://water.usgs.gov/data/watertips.html">Data Tips</a><br />
+		<a href="http://ga.water.usgs.gov/edu/dictionary.html">Explanation of terms</a><br />
+		   <!--<a href="/nwis/help/help?form=email">Subscribe for system changes</a>-->
+   <!--<a href="/nwis/subscribe/help?form=email">Subscribe for system changes</a>-->
+   <a href="/nwis/subscribe?form=email">Subscribe for system changes</a>
+ <br />
+		<a href="http://help.waterdata.usgs.gov/news">News</a><br />
+	</div>
+
+</div>
+
+<div class='clear'></div>
+
+
+
+<!-- BEGIN USGS Footer Template -->
+<div id="usgsfooter">
+  <p id="usgsfooterbar">
+  <a href="http://www.usgs.gov/laws/accessibility.html" title="Accessibility Policy (Section 508)">Accessibility</a>
+  <a href="http://www.usgs.gov/laws/accessibility.html" title="plug-in available here">Plug-Ins</a>
+  <a href="http://www.usgs.gov/foia/" title="Freedom of Information Act">FOIA</a>
+  <a href="http://www.usgs.gov/privacy.html" title="Privacy policies of the U.S. Geological Survey.">Privacy</a>
+  <a href="http://www.usgs.gov/policies_notices.html" title="Policies and notices that govern information posted on USGS Web sites.">Policies and Notices</a>
+  </p>
+  <p id="usgsfootertext">
+    <a href="http://usa.gov/"><img src="/nwisweb/icons/USGS_footer_graphic_usagov.jpg" alt="USA.gov logo" title="USAGov: Government Made Easy" width="90" height="26" /></a>
+
+    <a href="http://www.doi.gov/">U.S. Department of the Interior</a> |
+    <a href="http://www.usgs.gov/">U.S. Geological Survey</a><br />
+    <b>Title: USGS Current Conditions for Georgia <br />
+    URL: http://waterdata.usgs.gov/ga/nwis/current?<br />PARAmeter_cd=STATION_NM,DATETIME,00065,00060,MEDIAN,00062<br /></b>
+    Page Contact Information: <a href="http://water.usgs.gov/contact/gsanswers?pemail=gs-w-ga_NWISWeb_Maintainer&cemail=gs-w_NWISWeb_Feedback&subject=Site+Number:%20&viewnote=%3CH1%3EUSGS+NWIS+Feedback+Request%3C/H1%3E%3Cp%3E%3Cb%3EPlease%20enter%20a%20subject%20in%20the%20form%20below%20that%20briefly%20summarizes%20your%20request%3C/b%3E%3C/p%3E" target="_blank">Georgia Water Data Maintainer</a><br />
+    Page Last Modified: 2016-06-30 23:25:57 EDT<br />
+    <font size="-2"> 0.93 &nbsp; 0.4 vaww01<br /></font>
+   </p>
+</div>
+<br>
+<!-- END USGS Footer Template -->
+</div> <!-- nwisweb_footer -->
+<div id="data">
+    <ul style='list-style: none; display: inline-block' id='list'>
+        
+    </ul>
+</div>
+</body>
+</html>
