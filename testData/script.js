@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var row = cells[i];
 
         var td = row.getElementsByTagName('td');
-        console.log(td);
+        // console.log(td);
         //Anchor containing the river number
         if (td.length > 1) {
             var aTag = td[0].getElementsByTagName('a');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function(){
             //Trim the fat
             // if (i <= 209) {
                 riverCodes.push(aTag[0].innerHTML);
-                console.log('code '+aTag[0].innerHTML);
+                // console.log('code '+aTag[0].innerHTML);
                 var riverName = td[1].innerHTML;
                 rawNames.push(riverName);
             // }

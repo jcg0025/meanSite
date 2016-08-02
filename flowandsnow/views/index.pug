@@ -1,4 +1,65 @@
 extends layout
 
 block content
-    div(ng-view)
+    //- div.menu-btn.container(onclick='myFunction(this)')
+    //-   div.bar
+    //-   div.bar
+    //-   div.bar
+    #navDrop
+      svg#svg(width='4em', viewbox='0 0 30 42')
+        path#drop(fill='#216688', stroke='#eee', stroke-width='1.5', d='M15 3Q16.5 6.8 25 18A12.8 12.8 0 1 1 5 18Q13.5 6.8 15 3z')
+      #hamburger
+        .bar
+        .bar
+        .bar
+    nav.pushy.pushy-right
+      ul
+        //- li.pushy-submenu
+        //-   a(href='#') Submenu 1
+        //-   ul
+        //-     li.pushy-link
+        //-       a(href='#') Item 1
+        //-     li.pushy-link
+        //-       a(href='#') Item 2
+        //-     li.pushy-link
+        //-       a(href='#') Item 3
+        //- li.pushy-submenu
+        //-   a(href='#') Submenu 2
+        //-   ul
+        //-     li.pushy-link
+        //-       a(href='#') Item 1
+        //-     li.pushy-link
+        //-       a(href='#') Item 2
+        //-     li.pushy-link
+        //-       a(href='#') Item 3
+        //- li.pushy-submenu
+        //-   a(href='#') Submenu 3
+        //-   ul
+        //-     li.pushy-link
+        //-       a(href='#') Item 1
+        //-     li.pushy-link
+        //-       a(href='#') Item 2
+        //-     li.pushy-link
+        //-       a(href='#') Item 3
+        //- li.pushy-submenu
+        //-   a(href='#') Submenu 4
+        //-   ul
+        //-     li.pushy-link
+        //-       a(href='#') Item 1
+        //-     li.pushy-link
+        //-       a(href='#') Item 2
+        //-     li.pushy-link
+        //-       a(href='#') Item 3
+        li.pushy-link
+          a(href='#/') HOME
+        li.pushy-link
+          a(href='#/states') STATES
+        //- li.pushy-link
+        //-   a(href='#') Item 3
+        //- li.pushy-link
+        //-   a(href='#') Item 4
+    .site-overlay
+    div.push(ng-view, id='view')
+    script(src='/pushy/js/pushy.js')
+    
+      

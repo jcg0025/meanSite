@@ -1,5 +1,7 @@
-<h1>{{state}}</h1>
+<a class='backButt' href="/#/">home</a><span class='backButt' id='arrow'> > </span><a class='backButt' href='/#/states/'>states</a>
+<br>
+<h1 class='header'>{{state}}</h1>
 
 <div ng-repeat='river in rivers' id='riveList'>
-    <a href="/#/{{state}}/{{river.name}}/{{river.code}}/test">{{river.name}}</a>
+    <a href="/#/{{stateAbv}}/{{river.code}}/">{{river.name}}</a>
 </div>

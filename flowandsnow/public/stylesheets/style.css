@@ -1,8 +1,127 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/*html {
+  background:red;
+}*/
+/** {
+  background:red;
+}*/
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-a {
-  color: #00B7FF;
+#view {
+  background: black;
+  padding-bottom: 5em;
+  margin-top: -8.5em;
 }
+
+#arrow {
+  color: white;
+  float: left;
+  /*padding-top: 1em;*/
+}
+
+.backButt {
+  
+  float: left;
+  padding: 0.2em;
+}
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: black;
+  /*text-align: center;*/
+}
+
+.header {
+  color: white;
+  text-align: center;
+}
+/*#graph1 img {
+  border-radius: 2em;
+ 
+}*/
+/*#graph2 img {
+  border-radius: 2em;
+  
+}*/
+
+h4.label{
+  color: lightblue !important;
+  font-size: 2em !important;
+}
+
+.info {
+  color: khaki;
+}
+
+.hide{
+  display: none;
+}
+.show {
+  display: inline-block !important;
+}
+
+.graphButt {
+  color: greenyellow;
+}
+.graphButt:hover {
+  cursor: pointer;
+  color: cadetblue;
+  text-decoration: underline;
+}
+.test {
+  height: 4em;
+  width: 100%;
+  color: red;
+}
+
+#searchInput {
+  color: white;
+  background: cadetblue;
+}
+
+#testDiv {
+  height: 20em;
+  width: 20em;
+  background-color: red;
+}
+
+.filler {
+  height: 40em;
+  width: 100%;
+}
+
+#container1 {
+  /*background-image: url('../images/img1.jpg');*/
+  /*background-image: url('../images/bigDrop.jpg');*/
+  /*background-image: url('../images/mediumDrop.jpg');*/
+  /*background-image: url('../images/iceland.jpg');*/
+  height: 100%;
+  /*background-position-x: 100%;*/
+}
+
+#container1 .homeLeft {
+  text-align: right !important;
+  margin-left: 1em;
+  color: white;
+  font-size: 2em
+}
+
+#view {
+  /*background-image: url('../images/iceland.jpg');*/
+  /*background-image: url('../images/mediumDrop.jpg');*/
+  background-image: url('../images/bigDrop.jpg');
+  background-size: cover;
+}
+
+#enterButton {
+  font-size: 1em;
+  border: 2px solid black;
+  background: blue;
+  color: white;
+  padding: 0.4em;
+}
+
+
+
