@@ -26,9 +26,10 @@ body {
   /*background-image: url('../images/mediumDrop.jpg');*/
   background-image: url('../images/bigDrop.jpg');
   background-size: cover;
-  transition-property: margin-top;
+  transition: margin-top 0.8s ease-out, transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+  /*transition-property: margin-top;
   transition-duration: 0.8s;
-  transition-timing-function: ease-out;
+  transition-timing-function: ease-out;*/
 }
 
 .header {
