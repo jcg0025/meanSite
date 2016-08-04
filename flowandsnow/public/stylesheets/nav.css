@@ -48,6 +48,9 @@
     z-index: 1000;
     margin-left: 94%;
     margin-top: 1em;
+    transition-property: margin-top;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out;
 }
 .bar {
     width: 2em;
