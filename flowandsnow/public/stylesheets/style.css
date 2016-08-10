@@ -71,30 +71,7 @@ body {
 }
 
 /*VIEWRIVER__________________________________________*/
-h4.label{
-  color: lightblue !important;
-  font-size: 2em !important;
-}
 
-.info {
-  color: khaki;
-}
-
-.hide{
-  display: none;
-}
-.show {
-  display: inline-block !important;
-}
-
-.graphButt {
-  color: greenyellow;
-}
-.graphButt:hover {
-  cursor: pointer;
-  color: cadetblue;
-  text-decoration: underline;
-}
 
 
 
