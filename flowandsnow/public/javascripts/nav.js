@@ -6,33 +6,13 @@ $(document).ready(function() {
     var scrollTop = null;
     var navAdjust = null;
     var difference = null;
-    // var maxScrollTop = $(document).height() - $(window).height();
-    // var limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, 
-    //                document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );
-    // console.log(limit);
-    // console.log('mxst: '+maxScrollTop);
-    function hi() {
-        // if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-        //     console.log('maxed');
-          
-        // } else {
-        $('#view').css('margin-top', viewAdjust+'px');
-        navDrop.style.marginTop = navAdjust+'px';
-        
-    }
 
     $(window).scroll(function() { 
-        
-    	// clearTimeout( $.data( this, "scrollCheck" ) );
-        
-    	// $.data( this, "scrollCheck", setTimeout(function() {
-            scrollTop = $(this).scrollTop();
-            viewAdjust = String((scrollTop + 120)*-1);
-            navAdjust = String(scrollTop +34); 
-             $('#view').css('margin-top', viewAdjust+'px');
-            navDrop.style.marginTop = navAdjust+'px';
-            // hi();
-    // 	}, 300) );
+        scrollTop = $(this).scrollTop();
+        viewAdjust = String((scrollTop + 139) * -1);
+        navAdjust = String(scrollTop + 34);
+        $('#view').css('margin-top', viewAdjust + 'px');
+        navDrop.style.marginTop = navAdjust + 'px';
     });
     
     navDrop.addEventListener('mouseover', function() {

@@ -1,3 +1,4 @@
+<br>
 <a class='backButt' href="/#/{{state}}">&ltback</a></p>
 <h2 class='header'>{{riverName}}</h2>
 <div ng-hide='boolieOne'>
@@ -5,7 +6,7 @@
     <p class='info'>{{cfs}}</p>
     <p ng-click='showGraph1()' id='graphButt1' class='graphButt'>GRAPH</p>
     <span ng-hide='boolie1' id='graph1'>
-        <img class='mq' width='500px' src="{{dischargeSrc}}" alt="no image found">
+        <img id='dischargeImg' width='500px' src="{{dischargeSrc}}" alt="no image found">
     </span>
 </div>
 <br> 
@@ -14,7 +15,7 @@
     <p class='info'>{{height}}</p>
     <p ng-click='showGraph2()' id='graphButt2' class='graphButt'>GRAPH</p>
     <span ng-hide='boolie2' id='graph2' >
-        <img class='mg' width='500px' src="{{heightSrc}}" alt="no image found">
+        <img id='heightImg' width='500px' src="{{heightSrc}}" alt="no image found">
     </span>
 </div>
 <div style='display: none' id='data'></div>

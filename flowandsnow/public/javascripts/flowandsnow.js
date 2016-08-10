@@ -165,7 +165,8 @@ app.controller('stateSearchCtrl', ['$scope', '$resource', '$location',
 //ViEW RIVER PAGE
 app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routeParams', '$http',
     function($scope, $resource, $location, $routeParams, $http){
-        
+        $scope.boolie1 = true;
+        $scope.boolie2 = true;
         var heightAdjust = function () {
             var windowHeight = String(window.outerHeight + 30);
             var view = document.getElementById('view');
@@ -175,7 +176,9 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
 
 
         $(window).on('resize', function() {
-            heightAdjust();
+            if($scope.boolie1 && $scope.boolie2) {
+                heightAdjust();
+            }
         });
 
         // $scope.stateID = $routeParams.id;      
@@ -331,15 +334,13 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
         function setData(){
             $scope.boolieOne = false;
             $scope.boolieTwo = false;
-            $scope.boolie1 = true;
-            $scope.boolie2 = true;
             var titleStrings = [];
             var dischargeIndex = undefined;
             var heightIndex = undefined;
             var nugValueString = undefined;
             var nugs = [];
             var titles = d.getElementsByClassName('stationContainerHeading');
-            
+
             for (var i = 0; i < titles.length; i++) {
                 var title = titles[i].textContent;
                 titleStrings.push(title.trim());
@@ -380,21 +381,33 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
         }
 
         getData();
-
+        var img1 = document.getElementById('dischargeImg');
+        var img2 = document.getElementById('heightImg');
+        var view = document.getElementById('view');
+        var viewHeight = view.clientHeight;
+        console.log(viewHeight);
         $scope.showGraph1 = function() {
+            
             if ($scope.boolie1) {
                 $scope.boolie1 = false;
+                view.style.height = String(img1.height +viewHeight) +'px';
+                viewHeight = img1.height + viewHeight;
             } else {
                 $scope.boolie1 = true;
+                view.style.height = String(viewHeight - img1.height) +'px';
+                viewHeight = viewHeight - img1.height;
             }
-            $('#view').height = $(window).outerHeight();
             
         }
         $scope.showGraph2 = function() {
             if ($scope.boolie2) {
                 $scope.boolie2 = false;
+                view.style.height = String(img2.height +viewHeight) +'px';
+                viewHeight = img2.height + viewHeight;
             } else {
                 $scope.boolie2 = true;
+                view.style.height = String(viewHeight - img2.height) +'px';
+                viewHeight = viewHeight - img2.height;
             }
         }
 
