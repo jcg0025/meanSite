@@ -52,6 +52,10 @@
     transition-duration: 0.8s;
     transition-timing-function: ease-out;
 }
+
+#navDrop:hover {
+    cursor: pointer;
+}
 .bar {
     width: 2em;
     height: 2px;

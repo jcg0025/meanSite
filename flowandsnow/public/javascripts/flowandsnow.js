@@ -42,7 +42,9 @@ app.controller('HomeCtrl', ['$scope', '$resource', '$http', '$location',
         } 
         heightAdjust();
 
-        
+        $(window).on('resize', function() {
+            heightAdjust();
+        });
 
         // usgs rivers 
         // $http({
@@ -116,9 +118,22 @@ app.controller('hitsCtrl', ['$scope', '$resource', '$location', '$routeParams',
                     }
                 }
             }
+            var heightAdjust = function() {
+                var windowHeight = String(window.innerHeight + 30);
+                var view = document.getElementById('view');
+                view.style.height = windowHeight +'px';
+            } 
+        
             $scope.hits = hits;
             console.log('hits: '+hits);
-            $scope.hitsLength = hits.length;
+            if (hits.length !== 0) {
+                $scope.hitsLength = hits.length;
+                heightAdjust();
+            } else {
+                $scope.hitsLength = '0';
+                heightAdjust();
+            }
+            
         }
         
     }
@@ -151,6 +166,18 @@ app.controller('stateSearchCtrl', ['$scope', '$resource', '$location',
 app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routeParams', '$http',
     function($scope, $resource, $location, $routeParams, $http){
         
+        var heightAdjust = function () {
+            var windowHeight = String(window.outerHeight + 30);
+            var view = document.getElementById('view');
+            view.style.height = windowHeight + 'px';
+        }
+        heightAdjust();
+
+
+        $(window).on('resize', function() {
+            heightAdjust();
+        });
+
         // $scope.stateID = $routeParams.id;      
         $scope.riverCode = $routeParams.code;
         $scope.state = $routeParams.state;
@@ -201,24 +228,9 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
                 console.error(err);
             });
         }
-
-
         //Data extaction    
         function freshData() {
                 //initalize variables
-                var titleStrings = [];
-                var titles = d.getElementsByClassName('stationContainerHeading');
-                for (var i = 0; i < titles.length; i++) {
-                    var title = titles[i].textContent;
-                    titleStrings.push(title.trim());
-                }
-                // for (var i = 0; i < titleStrings.length; i++) {
-                //     if (titleStrings[0] === 'Gage height, feet'){
-                //         $scope.title =  
-                //     }
-                // }
-                
-                console.log('ts'+titleStrings);
                 var graphs = d.getElementsByClassName('iv_graph_float1');      //retrieves all graphs from hidden DOM
                 var headers = d.getElementsByClassName('stationContainer');    //retrieves all headers from hidden DOM
                 var graphSrc = undefined;
@@ -235,7 +247,7 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
                 function getHeaders() {
                     for (var i =1; i < headers.length; i++) {
                         var containers = headers[i].textContent;
-                        var startSlice = containers.search('Most');
+                        var startSlice = containers.search('value:');
                         var cdtNum = containers.search('CDT')+3;
                         var estNum = containers.search('EST')+3;
                         var cstNum = containers.search('CST')+3;
@@ -306,10 +318,10 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
 
                 //acquire image nodes for url extraction and getHeaders();
                 function getGraphs() {
-                    for (var i =0; i < graphs.length; i++) {
+                    for (var i = 0; i < graphs.length; i++) {
                         var graph = graphs[i].childNodes;
                         $scope.graphNodes.push(graph[1]);
-                    }                    
+                    }
                     getHeaders();
                 }
 
@@ -317,19 +329,57 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
 
         //After freshData() is collected setData()
         function setData(){
-            $scope.src1 = $scope.graphNodes[0].src;
-            if ($scope.graphNodes.length > 1) {         //Some pages only have one graph
-                $scope.src2 = $scope.graphNodes[1].src;
+            $scope.boolieOne = false;
+            $scope.boolieTwo = false;
+            $scope.boolie1 = true;
+            $scope.boolie2 = true;
+            var titleStrings = [];
+            var dischargeIndex = undefined;
+            var heightIndex = undefined;
+            var nugValueString = undefined;
+            var nugs = [];
+            var titles = d.getElementsByClassName('stationContainerHeading');
+            
+            for (var i = 0; i < titles.length; i++) {
+                var title = titles[i].textContent;
+                titleStrings.push(title.trim());
             }
-            $scope.height = nuggets[0];
-            $scope.cfs = nuggets[1];
+            for (var i=0; i < nuggets.length; i++) {
+                nugValueString = nuggets[i].slice(6);
+                var nugValueArray = nugValueString.split(' ');
+                var value = nugValueArray[1];
+                var date = nugValueArray[3];
+                var time = nugValueArray[5] +' '+nugValueArray[6];
+                var nug = {
+                    value: value,
+                    date: date,
+                    time: time
+                }
+                nugs.push(nug)
+            }
+            for (var i = 0; i< titleStrings.length; i++) {
+                if (titleStrings[i].includes('Discharge')) {
+                    dischargeIndex = i;
+                } else if(titleStrings[i].includes('Gage height')) {
+                    heightIndex = i;
+                }
+            }
+            if (heightIndex !== undefined) {
+                $scope.heightSrc = $scope.graphNodes[heightIndex].src;
+                $scope.height = nugs[heightIndex].value;
+            } else {
+                $scope.boolieTwo = true;
+            }
+            if (dischargeIndex !== undefined) {
+                $scope.dischargeSrc = $scope.graphNodes[dischargeIndex].src;
+                $scope.cfs = nugs[dischargeIndex].value;
+            } else {
+                $scope.boolieOne = true;
+            }
 
         }
 
         getData();
-
-        $scope.boolie1 = true;
-        $scope.boolie2 = true;
 
         $scope.showGraph1 = function() {
             if ($scope.boolie1) {
@@ -337,6 +387,8 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
             } else {
                 $scope.boolie1 = true;
             }
+            $('#view').height = $(window).outerHeight();
+            
         }
         $scope.showGraph2 = function() {
             if ($scope.boolie2) {
@@ -347,24 +399,6 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
         }
 
 }]);
-    
-// app.controller('EditRiverCtrl', ['$scope', '$resource', '$location', '$routeParams',
-//     function($scope, $resource, $location, $routeParams){
-//         $scope.verb = 'Edit';	
-//         var Rivers = $resource('/rivers/:id', { id: '@_id' }, {
-//             update: { method: 'PUT' }
-//         });
-
-//         Rivers.get({ id: $routeParams.id }, function(river){
-//             $scope.river = river;
-//         });
-
-//         $scope.save = function(){
-//             Rivers.update($scope.river, function(){
-//                 $location.path('/');
-//             });
-//         }
-//     }]);
 
 
 //DELETE RIVER PAGE    
@@ -386,10 +420,8 @@ app.controller('stateViewCtrl', ['$scope', '$resource', '$routeParams', '$http',
         Rivers.query(function(states) {
             // $scope.rivers = rivers[0].rivers;
             $scope.states = states;
-            console.log(states);
             for (var i = 0; i < states.length; i++){
                 if (states[i].state == $routeParams.state) {
-                    console.log('obj:'+states[i].name);
                     $scope.rivers = states[i].rivers; 
                     $scope.state = states[i].name;
                     $scope.stateAbv = states[i].state;

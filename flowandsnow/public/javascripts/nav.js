@@ -29,7 +29,6 @@ $(document).ready(function() {
             scrollTop = $(this).scrollTop();
             viewAdjust = String((scrollTop + 120)*-1);
             navAdjust = String(scrollTop +34); 
-            console.log('st: '+scrollTop);
              $('#view').css('margin-top', viewAdjust+'px');
             navDrop.style.marginTop = navAdjust+'px';
             // hi();
@@ -51,23 +50,23 @@ $(document).ready(function() {
         }
     });
     
-    function mobileView() {
-        console.log('mobile');
-    }
-    function defaultView() {
-        console.log('default');
-    }
+    // function mobileView() {
+    //     console.log('mobile');
+    // }
+    // function defaultView() {
+    //     console.log('default');
+    // }
 
-    if (/Mobi/.test(navigator.userAgent)) {
-        mobileView();
-    } 
-    window.addEventListener('resize', function(){
-        if (/Mobi/.test(navigator.userAgent)) {
-            mobileView();
-        } else {
-            defaultView();
-        }
-    });
+    // if (/Mobi/.test(navigator.userAgent)) {
+    //     mobileView();
+    // } 
+    // window.addEventListener('resize', function(){
+    //     if (/Mobi/.test(navigator.userAgent)) {
+    //         mobileView();
+    //     } else {
+    //         defaultView();
+    //     }
+    // });
 
   
 });
