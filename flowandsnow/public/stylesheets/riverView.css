@@ -1,33 +1,81 @@
 .infoBlock {
     text-align: center;
+    background: white;
+}
+.infoBlockContainer {
+  background: white;
 }
 
-
 h4.label{
-  color: lightblue !important;
-  font-size: 2em !important;
-  text-align: center !important;
+  color: black;
+  letter-spacing: 0.1em;
+  font-family: Tahoma;
+  font-size: 2em;
+  text-align: center;
 }
 
 .value {
-  color: black;
-  width: 8em;
-  height: 8em;
-  line-height: 8em;
+  color: white;
+  width: 6em;
+  height: 6em;
+  line-height: 6em;
   border-radius: 50%;
   font-size: 2em;
+  font-family: Tahoma;
+  letter-spacing: 0.1em;
   margin-top: 1em !important;
   margin-bottom: 1em !important;
-  background:white;
+  background: #216688;
   margin: auto;
+
 }
 
 .graphButt {
-  color: greenyellow;
+  background:white;
+  font-weight: bold;
+  color: #216688;
+  letter-spacing: 0.2em;
+  font-family: Tahoma;
+  border: 1px solid #216688;
+  padding:0.5em;
+  width: 6em;
+  margin: auto;
+  transition: background 0.2s linear;
 }
 
 .graphButt:hover {
   cursor: pointer;
-  color: cadetblue;
-  text-decoration: underline;
 }
+
+#blockContainer {
+  background: white;
+}
+
+#heightImg:hover {
+  cursor: zoom-in;
+}
+
+#dischargeImg:hover {
+  cursor: zoom-in;
+}
+
+.zoom {
+  transition: all linear 0.1s;
+  line-height: 20px;
+  opacity: 1;
+  padding: 5px;
+  border: 5px solid #ddd;
+  background:white;
+  border-radius: 1%;
+-webkit-filter: invert(75%);
+-moz-filter: invert(75%);
+-ms-filter: invert(75%);
+-o-filter: invert(75%);
+filter: invert(75%);
+}
+
+.zoomed {
+  width: 90%;
+  cursor: zoom-out !important;
+}
+

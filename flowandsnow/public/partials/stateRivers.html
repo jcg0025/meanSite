@@ -1,0 +1,38 @@
+
+<a class='backButt' href="/#/">home</a><span class='backButt' id='arrow'> > </span><a class='backButt' href='/#/states/'>states</a>
+<br>
+<h1 id='title' class='header'>{{state}}</h1>
+<div id='letterNav'>
+    <!--<a href='#0' id='_0'>0 </a>|-->
+    <a href="#A" id='_A'>A </a>|
+    <a href="#B" id='_B'>B </a>|
+    <a href="#C" id='_C'>C </a>|
+    <a href="#D" id='_D'>D </a>|
+    <a href="#E" id='_E'>E </a>|
+    <a href="#F" id='_F'>F </a>|
+    <a href="#G" id='_G'>G </a>|
+    <a href="#H" id='_H'>H </a>|
+    <a href="#I" id='_I'>I </a>|
+    <a href="#J" id='_J'>J </a>|
+    <a href="#K" id='_K'>K </a>|
+    <a href="#L" id='_L'>L </a>|
+    <a href="#M" id='_M'>M </a>|
+    <a href="#N" id='_N'>N </a>|
+    <a href="#O" id='_O'>O </a>|
+    <a href="#P" id='_P'>P </a>|
+    <a href="#Q" id='_Q'>Q </a>|
+    <a href="#R" id='_R'>R </a>|
+    <a href="#S" id='_S'>S </a>|
+    <a href="#T" id='_T'>T </a>|
+    <a href="#U" id='_U'>U </a>|
+    <a href="#V" id='_V'>V </a>|
+    <a href="#W" id='_W'>W </a>|
+    <a href="#X" id='_X'>X </a>|
+    <a href="#Y" id='_Y'>Y </a>|
+    <a href="#Z" id='_Z'>Z </a>|
+</div>
+
+<!--<div ng-repeat='river in rivers | orderBy: "name"' class='riverListItem' ng-click='openRiver(river.code)' ng-mouseover="show($event)">-->
+<div ng-repeat='river in rivers | orderBy: "name"' class='riverListItem' ng-click='openRiver(river.code)'>
+    <p class='pees' ng-mouseover="ripple($event)">{{river.name | uppercase }}</p>
+</div>

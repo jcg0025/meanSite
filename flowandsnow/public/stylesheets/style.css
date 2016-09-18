@@ -34,6 +34,8 @@ body {
 .header {
   color: white;
   text-align: center;
+  letter-spacing: 0.2em;
+  font-family: Tahoma;
 }
 
 #arrow {
@@ -69,6 +71,121 @@ body {
   color: white;
   padding: 0.4em;
 }
+/*State Rivers View*/
+.riverListItem {
+  letter-spacing: 0.4em;
+  padding-left: 3%;
+  padding-top: 1em;
+  border-bottom: 1px solid #eee;
+  font-family: Tahoma;
+  /*background: #061d2b;*/
+  background: white;
+  overflow: hidden;
+  transition: background 1s ease-out, font-size 0.5s ease-out;
+}
+
+.riverListItem:hover {
+  cursor: pointer;
+  background:#ccc;
+  font-size: 1.1em;
+  color: white;
+}
+
+.riverListItem p {
+  color: #061d2b;
+}
+
+.stateListItem {
+  padding-left: 5%;
+  letter-spacing: 0.2em;
+  font-size: 2em;
+}
+
+.stateHeader {
+  text-align: left;
+  font-size: 3em;
+  padding-left: 3%;
+  color: #888;
+  
+}
+.stateListItem a {
+  color:white;
+  transition: color 0.1s linear;
+}
+.stateListItem a:hover {
+  color: #216688;
+  text-decoration: none;
+}
+
+#letterNav {
+  text-align: center;
+  background: #216688;
+  color: white;
+}
+
+#letterNav a {
+  color: #888;
+}
+
+/*RIPPLE?
+
+/*.ink {
+  display: block;
+  position: absolute;
+  background:rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  -webkit-transform:scale(0);
+     -moz-transform:scale(0);
+       -o-transform:scale(0);
+          transform:scale(0);
+}
+
+.animate {
+	-webkit-animation:ripple 0.65s linear;
+   -moz-animation:ripple 0.65s linear;
+    -ms-animation:ripple 0.65s linear;
+     -o-animation:ripple 0.65s linear;
+        animation:ripple 0.65s linear;
+}
+
+@-webkit-keyframes ripple {
+    100% {opacity: 0; -webkit-transform: scale(2.5);}
+}
+@-moz-keyframes ripple {
+    100% {opacity: 0; -moz-transform: scale(2.5);}
+}
+@-o-keyframes ripple {
+    100% {opacity: 0; -o-transform: scale(2.5);}
+}
+@keyframes ripple {
+    100% {opacity: 0; transform: scale(2.5);}
+}
+
+
+.cyan{
+  background:#00bcd4;
+}
+
+.lightgreen{
+  background:#8bc34a;
+}
+
+.amber{
+  background:#ffc107;
+}
+
+.orange{
+  background:#ff9800;*/
+/*}*/
+
+
+
+
+
+
+
+
+
 
 /*VIEWRIVER__________________________________________*/
 

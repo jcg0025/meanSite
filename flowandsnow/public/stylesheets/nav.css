@@ -45,6 +45,7 @@
 #navDrop {
     width: 4em;
     background: transparent;
+    /*position: absolute;*/
     z-index: 1000;
     margin-left: 94%;
     margin-top: 1em;

@@ -16,7 +16,7 @@ $(document).ready(function() {
     });
     
     navDrop.addEventListener('mouseover', function() {
-        drop.style.fill = '#1b3252';
+        drop.style.fill = '#216688';
         drop.style.stroke = '#04d7e9'
         for (var i = 0; i < hamburger.length; i++) {
             hamburger[i].style.background = 'white';
@@ -47,6 +47,20 @@ $(document).ready(function() {
     //         defaultView();
     //     }
     // });
+    
+    // $('a[href^="#"]').on('click',function (e) {
+	//     e.preventDefault();
+
+	//     var target = this.hash;
+	//     var $target = $(target);
+
+	//     $('html, body').stop().animate({
+	//         'scrollTop': $target.offset().top
+	//     }, 900, 'swing', function () {
+	//         window.location.hash = target;
+	//     });
+    //     $target.css('height','1px');
+	// });
 
   
 });

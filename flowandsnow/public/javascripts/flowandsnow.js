@@ -7,8 +7,8 @@ app.config(['$routeProvider', function($routeProvider){
             controller: 'HomeCtrl'
         })
         .when('/states', {
-            templateUrl: 'partials/stateSearch.html',
-            controller: 'stateSearchCtrl'
+            templateUrl: 'partials/states.html',
+            controller: 'statesCtrl'
         })
         .when('/:state/:code', {
             templateUrl: 'partials/viewRiver.html',
@@ -19,8 +19,8 @@ app.config(['$routeProvider', function($routeProvider){
             controller: 'RemoveRiverCtrl'
         })
         .when('/:state', {
-            templateUrl: 'partials/states.html',
-            controller: 'stateViewCtrl'
+            templateUrl: 'partials/stateRivers.html',
+            controller: 'stateRiversCtrl'
         })
         .when('/search/:entry/results', {
             templateUrl: 'partials/hits.html',
@@ -141,7 +141,7 @@ app.controller('hitsCtrl', ['$scope', '$resource', '$location', '$routeParams',
 ]);
 
 //ADD RIVER PAGE  
-app.controller('stateSearchCtrl', ['$scope', '$resource', '$location',
+app.controller('statesCtrl', ['$scope', '$resource', '$location',
     function($scope, $resource, $location){
     
        
@@ -367,13 +367,13 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
             }
             if (heightIndex !== undefined) {
                 $scope.heightSrc = $scope.graphNodes[heightIndex].src;
-                $scope.height = nugs[heightIndex].value;
+                $scope.height = nugs[heightIndex].value+' ft';
             } else {
                 $scope.boolieTwo = true;
             }
             if (dischargeIndex !== undefined) {
                 $scope.dischargeSrc = $scope.graphNodes[dischargeIndex].src;
-                $scope.cfs = nugs[dischargeIndex].value;
+                $scope.cfs = nugs[dischargeIndex].value+' cfs';
             } else {
                 $scope.boolieOne = true;
             }
@@ -410,7 +410,24 @@ app.controller('ViewRiverCtrl', ['$scope', '$resource', '$location', '$routePara
                 viewHeight = viewHeight - img2.height;
             }
         }
-
+        var zoom = function(graph) {
+            graph.classList.add('zoomed');
+        }
+        var zoomOut = function(graph) {
+            graph.classList.remove('zoomed');
+        }
+        var graphs = document.getElementsByClassName('zoom');
+        for (var i =0; i <graphs.length; i++) {
+            graphs[i].addEventListener('click', function() {
+                var classes = this.classList.value;
+                var zoomed = classes.includes('zoomed');
+                if (zoomed) {
+                    zoomOut(this);
+                } else {
+                    zoom(this);
+                }
+            })
+        }    
 }]);
 
 
@@ -427,8 +444,25 @@ app.controller('RemoveRiverCtrl', ['$scope', '$resource', '$location', '$routePa
 }]);
 
 //STATES PAGE
-app.controller('stateViewCtrl', ['$scope', '$resource', '$routeParams', '$http', function($scope, $resource, $routeParams, $http) {
-  
+app.controller('stateRiversCtrl', ['$scope', '$resource', '$routeParams', '$http', '$location', function($scope, $resource, $routeParams, $http, $location) {
+    var test = function() {
+        console.log($scope.items);
+    }
+    $('#letterNav > a[href^="#"]').on('click',function (e) {
+	    e.preventDefault();
+
+	    var target = this.hash;
+	    var $target = $(target);
+
+	    $('html, body').stop().animate({
+	        'scrollTop': $target.offset().top
+	    }, 900, 'swing', function () {
+            console.log('hi');
+	        // window.location.hash = target;
+	    });
+        // $target.css('height','1px');
+	});
+
     var Rivers = $resource('/rivers');
         Rivers.query(function(states) {
             // $scope.rivers = rivers[0].rivers;
@@ -440,24 +474,154 @@ app.controller('stateViewCtrl', ['$scope', '$resource', '$routeParams', '$http',
                     $scope.stateAbv = states[i].state;
                 }
             }
-            // console.log(rivers);
+            
     });
-//   var states = $resource('rivers');
-//   states.get({state: $routeParams.state}, function(res) {
-    //   $scope.rivers = res.rivers;
-    //   console.log('yo:'+res);
-    //   $scope.state = res.name;
-    //   $scope.abv = res.state;
-    //   $scope.stateID = res._id;
-//   });
-//   $http({
-//       method: 'GET',
-//       url: '/rivers/'+$routeParams.id
-//   }).then(function success(res){
-//       console.log(res);
-//   }, function error(err) {
-//       console.log(err);
-//   })
+
+    $scope.openRiver = function(code) {
+        $location.path('/'+$scope.stateAbv+'/'+code);
+    }
+
+    var letterNav = document.getElementById('letterNav');
+    var set = true;
+    var names = [];
+
+    if (letterNav != null) {
+        console.log(letterNav);
+        letterNav.addEventListener('mouseover', function(){
+            var ps = document.getElementsByClassName('pees');
+            for (var i=0; i < ps.length; i++) {
+                var name = ps[i].innerText;
+                var nextName = ps[i+1];
+                if (name[0] == '0') {
+                    continue;
+                }
+                if (name[0] == 'A') {
+                    if (set) { ps[i].id = 'A'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'B') {
+                    if (!set) { ps[i].id = 'B'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'C') {
+                    if (set) { ps[i].id = 'C'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'D') {
+                    if (!set) { ps[i].id = 'D'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'E') {
+                    if (set) { ps[i].id = 'E'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'F') {
+                    if (!set) { ps[i].id = 'F'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'G') {
+                    if (set) { ps[i].id = 'G'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'H') {
+                    if (!set) { ps[i].id = 'H'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'I') {
+                    if (set) { ps[i].id = 'I'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'J') {
+                    if (!set) { ps[i].id = 'J'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'K') {
+                    if (set) { ps[i].id = 'K'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'L') {
+                    if (!set) { ps[i].id = 'L'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'M') {
+                    if (set) { ps[i].id = 'M'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'N') {
+                    if (!set) { ps[i].id = 'N'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'O') {
+                    if (set) { ps[i].id = 'O'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'P') {
+                    if (!set) { ps[i].id = 'P'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'Q') {
+                    if (set) { ps[i].id = 'Q'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); console.log('letterActivate'); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'R') {
+                    if (!set) { ps[i].id = 'R'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'S') {
+                    if (set) { ps[i].id = 'S'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'T') {
+                    if (!set) { ps[i].id = 'T'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'U') {
+                    if (set) { ps[i].id = 'U'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'V') {
+                    if (!set) { ps[i].id = 'V'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'W') {
+                    if (set) { ps[i].id = 'W'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'X') {
+                    if (!set) { ps[i].id = 'X'; set = true; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'Y') {
+                    if (set) { ps[i].id = 'Y'; set = false; var letterActivate = document.getElementById('_'+ps[i].id); letterActivate.style.color = '#04d7e9';} 
+                    else {continue;}
+                } else if(name[0] == 'Z') {
+                    if (!set) { ps[i].id = 'Z'; set = true; } 
+                    else {continue;}
+                } else {
+                    return false;
+                } 
+                
+                
+                
+            }
+            
+        });
+    }
+
+
+    
+
+    
+
+    
+ 
+    // $scope.ripple = function(e) {
+    //     var target = e.currentTarget;
+    //     var ink, d, x, y;
+    //     var _this = this;
+    //     console.log(target.parentNode);
+    //     _this = target.parentNode;
+    //     if ($(_this).find(".ink").length === 0) {
+    //         $(_this).append("<span class='ink'></span>");
+    //     }
+
+    //     ink = $(_this).find(".ink");
+    //     ink.removeClass("animate");
+
+    //     if (!ink.height() && !ink.width()) {
+    //         d = Math.max($(_this).outerWidth(), $(_this).outerHeight());
+    //         ink.css({ height: d, width: d });
+    //     }
+
+    //     x = e.pageX - $(_this).offset().left - ink.width() / 2;
+    //     y = e.pageY - $(_this).offset().top - ink.height() / 2;
+
+    //     ink.css({ top: y + 'px', left: x + 'px' }).addClass("animate");
+    // }
+    // var items = document.getElementsByClassName('riverListItem');
+    // for (var i =0; i< items.length; i++) {
+    //     items[i].addEventListener('mouseover', function(e){
+    //         console.log(e.target);
+    //     });
+    // }
+
+            
 }]);
 
 

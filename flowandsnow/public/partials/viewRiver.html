@@ -1,21 +1,27 @@
 <br>
 <a class='backButt' href="/#/{{state}}">&ltback</a></p>
 <h2 class='header'>{{riverName}}</h2>
+<div class="infoBlockContainer">
 <div class='infoBlock' ng-hide='boolieOne'>
+    <br><br>
     <h4 class='label'>Discharge </h4>
-    <div class='value'>{{cfs}} cfs</div>
+    <div class='value'>{{cfs}}</div>
     <p ng-click='showGraph1()' id='graphButt1' class='graphButt'>GRAPH</p>
+    <br>
     <span ng-hide='boolie1' id='graph1'>
-        <img id='dischargeImg' width='500px' src="{{dischargeSrc}}" alt="no image found">
+        <img class='zoom' id='dischargeImg' width='500px' src="{{dischargeSrc}}" alt="no image found">
     </span>
 </div>
-<br> 
 <div class='infoBlock' ng-hide='boolieTwo'>
+    <br><br>
     <h4 class='label'>Gage Height </h4>
-    <div class='value'>{{height}} ft.</div>
+    <div class='value'>{{height}}</div>
     <p ng-click='showGraph2()' id='graphButt2' class='graphButt'>GRAPH</p>
+    <br>
     <span ng-hide='boolie2' id='graph2' >
-        <img id='heightImg' width='500px' src="{{heightSrc}}" alt="no image found">
+        <img class='zoom' id='heightImg' width='500px' src="{{heightSrc}}" alt="no image found">
     </span>
+    <br><br><br>
 </div>
 <div style='display: none' id='data'></div>
+</div>
